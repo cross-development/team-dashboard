@@ -33,7 +33,7 @@ const StyledHeader = styled.header`
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	width: 100vw;
+	width: 100%;
 	background-color: #ffffff;
 	padding: 1rem 2rem;
 `;

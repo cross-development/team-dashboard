@@ -25,8 +25,9 @@ export const StyledImgWrap = styled.div`
 	width: 70px;
 	height: 70px;
 	border-radius: 50px;
-	box-shadow: 0px 0px 2px 0px #707070;
-	margin-bottom: 1rem;
+	/* background-color: ${({ isAccepted }) => (isAccepted ? '507bfc' : 'transparent')}; */
+	/* box-shadow: 0px 0px 2px 0px #707070; */
+	/* margin-bottom: 1rem; */
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -120,4 +121,22 @@ export const StyledButton = styled.button`
 	&:hover {
 		box-shadow: 0px 10px 20px 0px rgba(80, 123, 252, 0.8);
 	}
+`;
+
+export const StyledFileInput = styled.input`
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+`;
+
+export const StyledFileLabel = styled.label`
+	max-width: 80%;
+	cursor: pointer;
+	overflow: hidden;
+	border-radius: 50px;
+	box-shadow: 0px 0px 2px 0px #707070;
+	margin-bottom: 1rem;
 `;

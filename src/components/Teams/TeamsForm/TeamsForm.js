@@ -3,44 +3,55 @@ import React from 'react';
 import PropTypes from 'prop-types';
 //Styles
 import { FaUser } from 'react-icons/fa';
-import { StyledTitle, StylesForm, StyledImgWrap } from './TeamsForm.styles';
-import { StyledLabel, StyledInput, StyledButton } from './TeamsForm.styles';
+import { StyledTitle, StylesForm, StyledImgWrap, StyledFileInput } from './TeamsForm.styles';
+import { StyledLabel, StyledInput, StyledButton, StyledFileLabel } from './TeamsForm.styles';
 
-const TeamsForm = ({ name, email, onSubmit, onChange }) => (
-	<StylesForm onSubmit={onSubmit}>
-		<StyledTitle>Add New Member</StyledTitle>
+const TeamsForm = ({ name, email, avatarRef, onSubmit, onChange }) => {
+	return (
+		<StylesForm onSubmit={onSubmit}>
+			<StyledTitle>Add New Member</StyledTitle>
 
-		<StyledImgWrap>
-			<FaUser />
-		</StyledImgWrap>
+			<StyledFileLabel htmlFor="avatarFile">
+				<StyledImgWrap>
+					<StyledFileInput
+						type="file"
+						name="avatar"
+						id="avatarFile"
+						ref={avatarRef}
+						accept="image/jpeg,image/png"
+					/>
+					<FaUser />
+				</StyledImgWrap>
+			</StyledFileLabel>
 
-		<StyledLabel>
-			<StyledInput
-				required
-				type="name"
-				name="name"
-				value={name}
-				placeholder="Enter full name..."
-				autoComplete="off"
-				onChange={onChange}
-			/>
-		</StyledLabel>
+			<StyledLabel>
+				<StyledInput
+					required
+					type="name"
+					name="name"
+					value={name}
+					placeholder="Enter full name..."
+					autoComplete="off"
+					onChange={onChange}
+				/>
+			</StyledLabel>
 
-		<StyledLabel>
-			<StyledInput
-				required
-				type="email"
-				name="email"
-				value={email}
-				placeholder="Enter email..."
-				autoComplete="off"
-				onChange={onChange}
-			/>
-		</StyledLabel>
+			<StyledLabel>
+				<StyledInput
+					required
+					type="email"
+					name="email"
+					value={email}
+					placeholder="Enter email..."
+					autoComplete="off"
+					onChange={onChange}
+				/>
+			</StyledLabel>
 
-		<StyledButton type="submit">Add</StyledButton>
-	</StylesForm>
-);
+			<StyledButton type="submit">Add</StyledButton>
+		</StylesForm>
+	);
+};
 
 TeamsForm.propTypes = {
 	name: PropTypes.string.isRequired,

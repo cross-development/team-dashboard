@@ -8,35 +8,39 @@ import { StyledCardItem, StyledLikeBtn, StyledImgWrap, StyledAvatar } from './Te
 
 import UserAvatar from 'assets/user.png';
 
-const TeamsCard = () => {
-	return (
-		<StyledCardItem>
-			<StyledLikeBtn type="button" isLiked={true}>
-				<FaHeart />
-			</StyledLikeBtn>
+const TeamsCard = ({ name, email, avatar, isLiked, onChangeLike }) => (
+	<StyledCardItem>
+		<StyledLikeBtn type="button" isLiked={isLiked} onClick={onChangeLike}>
+			<FaHeart />
+		</StyledLikeBtn>
 
-			<StyledImgWrap>
-				<StyledAvatar src={UserAvatar} />
-			</StyledImgWrap>
+		<StyledImgWrap>
+			<StyledAvatar src={avatar || UserAvatar} />
+		</StyledImgWrap>
 
-			<StyledName>Marie Walters</StyledName>
-			<StyledEmail>mariewalters@gmail.com</StyledEmail>
+		<StyledName>{name}</StyledName>
+		<StyledEmail>{email}</StyledEmail>
 
-			<StyledControlWrap>
-				<StyledButton>
-					<FaClipboardList />
-					Assign
-				</StyledButton>
+		<StyledControlWrap>
+			<StyledButton>
+				<FaClipboardList />
+				Assign
+			</StyledButton>
 
-				<StyledButton>
-					<FaEye />
-					View
-				</StyledButton>
-			</StyledControlWrap>
-		</StyledCardItem>
-	);
+			<StyledButton>
+				<FaEye />
+				View
+			</StyledButton>
+		</StyledControlWrap>
+	</StyledCardItem>
+);
+
+TeamsCard.propTypes = {
+	name: PropTypes.string.isRequired,
+	email: PropTypes.string.isRequired,
+	avatar: PropTypes.string.isRequired,
+	isLiked: PropTypes.bool.isRequired,
+	onChangeLike: PropTypes.func.isRequired,
 };
-
-TeamsCard.propTypes = {};
 
 export default TeamsCard;

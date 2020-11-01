@@ -7,6 +7,7 @@ const { addTeammateRequest, removeTeammateRequest, getTeammatesRequest } = teamA
 const { addTeammateSuccess, removeTeammateSuccess, getTeammatesSuccess } = teamActions;
 const { addTeammateFailure, removeTeammateFailure, getTeammatesFailure } = teamActions;
 
+//Fixed
 const addTeammate = credentials => dispatch => {
 	dispatch(addTeammateRequest());
 

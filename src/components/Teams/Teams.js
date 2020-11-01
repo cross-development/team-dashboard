@@ -7,23 +7,29 @@ import TeamsCard from './TeamsCard';
 //Styles
 import styled from 'styled-components';
 
-const Teams = ({ name, email, onSubmit, onChange, teamMembers }) => (
-	<StyledContainer>
-		<StyledList>
-			<li>
-				<TeamsForm name={name} email={email} onSubmit={onSubmit} onChange={onChange} />
-			</li>
-			<TeamsCard />
-			<TeamsCard />
-			<TeamsCard />
-			<TeamsCard />
-			<TeamsCard />
-			<TeamsCard />
-			<TeamsCard />
-			<TeamsCard />
-			<TeamsCard />
-		</StyledList>
-	</StyledContainer>
+const Teams = ({ name, email, avatarRef, onSubmit, onChange, teamMembers, onChangeLike }) => (
+	<StyledList>
+		<li>
+			<TeamsForm
+				name={name}
+				email={email}
+				avatarRef={avatarRef}
+				onSubmit={onSubmit}
+				onChange={onChange}
+			/>
+		</li>
+
+		{teamMembers.map(({ name, email, avatar, isLiked }) => (
+			<TeamsCard
+				key={email}
+				name={name}
+				email={email}
+				avatar={avatar}
+				isLiked={isLiked}
+				onChangeLike={onChangeLike}
+			/>
+		))}
+	</StyledList>
 );
 
 Teams.propTypes = {
@@ -31,16 +37,9 @@ Teams.propTypes = {
 	email: PropTypes.string.isRequired,
 	onSubmit: PropTypes.func.isRequired,
 	onChange: PropTypes.func.isRequired,
+	teamMembers: PropTypes.arrayOf(PropTypes.any),
+	onChangeLike: PropTypes.func.isRequired,
 };
-
-const StyledContainer = styled.div`
-	/* display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: flex-start;
-	align-items: flex-start;
-	padding: 0 3rem; */
-`;
 
 const StyledList = styled.ul`
 	display: grid;
