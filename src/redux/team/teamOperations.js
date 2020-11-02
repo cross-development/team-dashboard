@@ -3,9 +3,9 @@ import firebase from 'firebase';
 //Redux
 import teamActions from './teamActions';
 
-const { addTeammateRequest, removeTeammateRequest, getTeammatesRequest } = teamActions;
-const { addTeammateSuccess, removeTeammateSuccess, getTeammatesSuccess } = teamActions;
-const { addTeammateFailure, removeTeammateFailure, getTeammatesFailure } = teamActions;
+const { addTeammateRequest, addTeammateSuccess, addTeammateFailure } = teamActions;
+const { removeTeammateRequest, removeTeammateSuccess, removeTeammateFailure } = teamActions;
+const { getTeammatesRequest, getTeammatesSuccess, getTeammatesFailure } = teamActions;
 
 //Fixed
 const addTeammate = credentials => dispatch => {

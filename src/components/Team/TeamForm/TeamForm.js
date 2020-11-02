@@ -3,10 +3,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 //Styles
 import { FaUser } from 'react-icons/fa';
-import { StyledTitle, StylesForm, StyledImgWrap, StyledFileInput } from './TeamsForm.styles';
-import { StyledLabel, StyledInput, StyledButton, StyledFileLabel } from './TeamsForm.styles';
+import { StyledTitle, StylesForm, StyledImgWrap, StyledFileInput } from './TeamForm.styles';
+import { StyledLabel, StyledInput, StyledButton, StyledFileLabel } from './TeamForm.styles';
 
-const TeamsForm = ({ name, email, avatarRef, onSubmit, onChange }) => {
+const TeamForm = ({ name, email, avatarRef, onSubmit, onChange }) => {
 	return (
 		<StylesForm onSubmit={onSubmit}>
 			<StyledTitle>Add New Member</StyledTitle>
@@ -53,11 +53,11 @@ const TeamsForm = ({ name, email, avatarRef, onSubmit, onChange }) => {
 	);
 };
 
-TeamsForm.propTypes = {
+TeamForm.propTypes = {
 	name: PropTypes.string.isRequired,
 	email: PropTypes.string.isRequired,
 	onSubmit: PropTypes.func.isRequired,
 	onChange: PropTypes.func.isRequired,
 };
 
-export default TeamsForm;
+export default TeamForm;

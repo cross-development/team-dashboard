@@ -27,12 +27,12 @@ const routes = [
 		component: lazy(() => import('pages/LoginPage' /* webpackChunkName: "login-page"*/)),
 	},
 	{
-		path: '/teams',
-		label: 'Teams',
+		path: '/team',
+		label: 'Team',
 		exact: true,
 		private: true,
 		restricted: false,
-		component: lazy(() => import('pages/TeamsPage' /* webpackChunkName: "teams-page"*/)),
+		component: lazy(() => import('pages/TeamPage' /* webpackChunkName: "team-page"*/)),
 	},
 	{
 		path: '/teams/:teammateId',

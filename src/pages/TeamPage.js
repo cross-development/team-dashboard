@@ -1,7 +1,7 @@
 //Core
 import React, { useState, useRef } from 'react';
 //Components
-import Teams from 'components/Teams';
+import Team from 'components/Team';
 import { Notification } from 'components/Commons';
 //Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,7 +12,7 @@ const initialState = {
 	email: '',
 };
 
-const TeamsPage = () => {
+const TeamPage = () => {
 	const [state, setState] = useState(initialState);
 	const [isLiked, setIsLiked] = useState(false);
 
@@ -42,7 +42,7 @@ const TeamsPage = () => {
 
 	return (
 		<>
-			<Teams
+			<Team
 				{...state}
 				avatarRef={avatarRef}
 				teamMembers={teammates}
@@ -56,4 +56,4 @@ const TeamsPage = () => {
 	);
 };
 
-export default TeamsPage;
+export default TeamPage;

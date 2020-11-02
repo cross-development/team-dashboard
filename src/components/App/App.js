@@ -3,6 +3,7 @@ import React, { Suspense, useEffect } from 'react';
 import { Switch, BrowserRouter as Router } from 'react-router-dom';
 //Components
 import Navbar from '../Navbar';
+import TeamNavigate from '../TeamNavigate';
 import { Layout } from '../Commons';
 import { Loader } from '../Commons';
 //Redux
@@ -31,6 +32,8 @@ const App = () => {
 			<Navbar />
 
 			<Layout>
+				<TeamNavigate />
+
 				<Suspense fallback={<Loader />}>
 					<Switch>
 						{routes.map(route =>

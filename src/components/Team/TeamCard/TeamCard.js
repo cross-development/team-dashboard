@@ -3,12 +3,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 //Styles
 import { FaHeart, FaEye, FaClipboardList } from 'react-icons/fa';
-import { StyledName, StyledEmail, StyledControlWrap, StyledButton } from './TeamsCard.styles';
-import { StyledCardItem, StyledLikeBtn, StyledImgWrap, StyledAvatar } from './TeamsCard.styles';
+import { StyledName, StyledEmail, StyledControlWrap, StyledButton } from './TeamCard.styles';
+import { StyledCardItem, StyledLikeBtn, StyledImgWrap, StyledAvatar } from './TeamCard.styles';
 
 import UserAvatar from 'assets/user.png';
 
-const TeamsCard = ({ name, email, avatar, isLiked, onChangeLike }) => (
+const TeamCard = ({ name, email, avatar, isLiked, onChangeLike }) => (
 	<StyledCardItem>
 		<StyledLikeBtn type="button" isLiked={isLiked} onClick={onChangeLike}>
 			<FaHeart />
@@ -35,7 +35,7 @@ const TeamsCard = ({ name, email, avatar, isLiked, onChangeLike }) => (
 	</StyledCardItem>
 );
 
-TeamsCard.propTypes = {
+TeamCard.propTypes = {
 	name: PropTypes.string.isRequired,
 	email: PropTypes.string.isRequired,
 	avatar: PropTypes.string.isRequired,
@@ -43,4 +43,4 @@ TeamsCard.propTypes = {
 	onChangeLike: PropTypes.func.isRequired,
 };
 
-export default TeamsCard;
+export default TeamCard;
