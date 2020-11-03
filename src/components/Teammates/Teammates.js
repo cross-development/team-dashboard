@@ -2,15 +2,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 //Components
-import TeamForm from './TeamForm';
-import TeamCard from './TeamCard';
+import TeammatesForm from './TeammatesForm';
+import TeammatesCard from './TeammatesCard';
 //Styles
 import styled from 'styled-components';
 
-const Team = ({ name, email, avatarRef, onSubmit, onChange, teamMembers, onChangeLike }) => (
+const Teammates = ({ name, email, avatarRef, onSubmit, onChange, teamMembers, onChangeLike }) => (
 	<StyledList>
 		<li>
-			<TeamForm
+			<TeammatesForm
 				name={name}
 				email={email}
 				avatarRef={avatarRef}
@@ -20,7 +20,7 @@ const Team = ({ name, email, avatarRef, onSubmit, onChange, teamMembers, onChang
 		</li>
 
 		{teamMembers.map(({ name, email, avatar, isLiked }) => (
-			<TeamCard
+			<TeammatesCard
 				key={email}
 				name={name}
 				email={email}
@@ -32,7 +32,7 @@ const Team = ({ name, email, avatarRef, onSubmit, onChange, teamMembers, onChang
 	</StyledList>
 );
 
-Team.propTypes = {
+Teammates.propTypes = {
 	name: PropTypes.string.isRequired,
 	email: PropTypes.string.isRequired,
 	onSubmit: PropTypes.func.isRequired,
@@ -51,4 +51,4 @@ const StyledList = styled.ul`
 	list-style: none;
 `;
 
-export default Team;
+export default Teammates;

@@ -2,7 +2,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 //Redux
 import authActions from '../auth/authActions';
-import teamActions from '../team/teamActions';
+import teamsActions from '../teams/teamsActions';
 
 const loading = createReducer(false, {
 	[authActions.signInRequest]: () => true,
@@ -21,17 +21,29 @@ const loading = createReducer(false, {
 	[authActions.authStateChangeSuccess]: () => false,
 	[authActions.authStateChangeFailure]: () => false,
 
-	[teamActions.addTeammateRequest]: () => true,
-	[teamActions.addTeammateSuccess]: () => false,
-	[teamActions.addTeammateFailure]: () => false,
+	[teamsActions.createTeamRequest]: () => true,
+	[teamsActions.createTeamSuccess]: () => false,
+	[teamsActions.createTeamFailure]: () => false,
 
-	[teamActions.removeTeammateRequest]: () => true,
-	[teamActions.removeTeammateSuccess]: () => false,
-	[teamActions.removeTeammateFailure]: () => false,
+	[teamsActions.removeTeamRequest]: () => true,
+	[teamsActions.removeTeamSuccess]: () => false,
+	[teamsActions.removeTeamFailure]: () => false,
 
-	[teamActions.getTeammatesRequest]: () => true,
-	[teamActions.getTeammatesSuccess]: () => false,
-	[teamActions.getTeammatesFailure]: () => false,
+	[teamsActions.getAllTeamsRequest]: () => true,
+	[teamsActions.getAllTeamsSuccess]: () => false,
+	[teamsActions.getAllTeamsFailure]: () => false,
+
+	[teamsActions.addTeammateRequest]: () => true,
+	[teamsActions.addTeammateSuccess]: () => false,
+	[teamsActions.addTeammateFailure]: () => false,
+
+	[teamsActions.removeTeammateRequest]: () => true,
+	[teamsActions.removeTeammateSuccess]: () => false,
+	[teamsActions.removeTeammateFailure]: () => false,
+
+	[teamsActions.getTeammatesRequest]: () => true,
+	[teamsActions.getTeammatesSuccess]: () => false,
+	[teamsActions.getTeammatesFailure]: () => false,
 });
 
 export default loading;

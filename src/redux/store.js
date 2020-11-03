@@ -2,14 +2,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 //Redux
 import { authReducers } from 'redux/auth';
-import { teamReducers } from 'redux/team';
+import { teamsReducers } from 'redux/teams';
 import { loaderReducers } from 'redux/loader';
 import { errorReducers } from 'redux/error';
 
 const store = configureStore({
 	reducer: {
 		auth: authReducers,
-		team: teamReducers,
+		teams: teamsReducers,
 		loader: loaderReducers,
 		error: errorReducers,
 	},

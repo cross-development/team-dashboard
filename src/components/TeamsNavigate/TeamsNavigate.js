@@ -1,17 +1,17 @@
 //Core
 import React from 'react';
 //Components
-import TeamInfo from './TeamInfo';
-import TeamControls from './TeamControls';
+import TeamsInfo from './TeamsInfo';
+import TeamsControls from './TeamsControls';
 //Styles
 import styled from 'styled-components';
 
-const TeamNavigate = () => {
+const TeamsNavigate = () => {
 	return (
 		<StyledContainer>
-			<TeamInfo />
+			<TeamsInfo />
 
-			<TeamControls />
+			<TeamsControls />
 		</StyledContainer>
 	);
 };
@@ -26,4 +26,4 @@ const StyledContainer = styled.div`
 	padding: 0 2.6rem;
 `;
 
-export default TeamNavigate;
+export default TeamsNavigate;

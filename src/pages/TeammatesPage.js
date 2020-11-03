@@ -1,18 +1,18 @@
 //Core
 import React, { useState, useRef } from 'react';
 //Components
-import Team from 'components/Team';
+import Teammates from 'components/Teammates';
 import { Notification } from 'components/Commons';
 //Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { addTeammate } from 'redux/team/teamOperations';
+import { addTeammate } from 'redux/teams/teamsOperations';
 
 const initialState = {
 	name: '',
 	email: '',
 };
 
-const TeamPage = () => {
+const TeammatesPage = () => {
 	const [state, setState] = useState(initialState);
 	const [isLiked, setIsLiked] = useState(false);
 
@@ -20,7 +20,7 @@ const TeamPage = () => {
 
 	const dispatch = useDispatch();
 	const { error } = useSelector(state => state);
-	const { teammates } = useSelector(state => state.team);
+	const { teammates } = useSelector(state => state.teams);
 
 	const handleChangeState = ({ target: { name, value } }) =>
 		setState(prevState => ({ ...prevState, [name]: value }));
@@ -42,7 +42,7 @@ const TeamPage = () => {
 
 	return (
 		<>
-			<Team
+			<Teammates
 				{...state}
 				avatarRef={avatarRef}
 				teamMembers={teammates}
@@ -56,4 +56,4 @@ const TeamPage = () => {
 	);
 };
 
-export default TeamPage;
+export default TeammatesPage;
