@@ -1,11 +1,11 @@
 //Core
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 //Components
 import Teams from 'components/Teams';
 import { Notification } from 'components/Commons';
 //Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { createTeam } from 'redux/teams/teamsOperations';
+import { createTeam, getAllTeams } from 'redux/teams/teamsOperations';
 
 import teamAvatar from 'assets/team.png';
 
@@ -21,6 +21,10 @@ const TeamsPage = () => {
 	const { user } = useSelector(state => state.auth);
 	const { error } = useSelector(state => state);
 	const { teams } = useSelector(state => state.teams);
+
+	useEffect(() => {
+		dispatch(getAllTeams());
+	}, [dispatch]);
 
 	const handleChangeState = ({ target: { name, value } }) =>
 		setState(prevState => ({ ...prevState, [name]: value }));

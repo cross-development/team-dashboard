@@ -5,7 +5,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import teamsActions from './teamsActions';
 
 const teams = createReducer([], {
-	[teamsActions.getAllTeamsSuccess]: (state, { payload }) => [...payload],
+	[teamsActions.getAllTeamsSuccess]: (state, { payload }) => payload,
 });
 
 const teammates = createReducer([], {

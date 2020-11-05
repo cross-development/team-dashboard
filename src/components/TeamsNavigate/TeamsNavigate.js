@@ -6,15 +6,13 @@ import TeamsControls from './TeamsControls';
 //Styles
 import styled from 'styled-components';
 
-const TeamsNavigate = () => {
-	return (
-		<StyledContainer>
-			<TeamsInfo />
+const TeamsNavigate = () => (
+	<StyledContainer>
+		<TeamsInfo />
 
-			<TeamsControls />
-		</StyledContainer>
-	);
-};
+		<TeamsControls />
+	</StyledContainer>
+);
 
 const StyledContainer = styled.div`
 	display: flex;

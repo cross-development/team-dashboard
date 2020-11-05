@@ -3,7 +3,7 @@ import firebase from 'firebase';
 //Redux
 import teamsActions from './teamsActions';
 
-const { createTeamRequest, createTeamSuccess, createTeamFailure } = teamsActions;
+const { addTeamRequest, addTeamSuccess, addTeamFailure } = teamsActions;
 const { removeTeamRequest, removeTeamSuccess, removeTeamFailure } = teamsActions;
 const { getAllTeamsRequest, getAllTeamsSuccess, getAllTeamsFailure } = teamsActions;
 
@@ -13,15 +13,15 @@ const { getTeammatesRequest, getTeammatesSuccess, getTeammatesFailure } = teamsA
 
 //Fixed
 const createTeam = (team, uid) => dispatch => {
-	dispatch(createTeamRequest());
+	dispatch(addTeamRequest());
 
 	try {
-		const teams = firebase.database().ref('teams/' + uid + '/team');
-		teams.push(team);
+		const teams = firebase.database().ref('teams/');
+		teams.push({ uid, ...team });
 
-		dispatch(createTeamSuccess(team));
+		dispatch(addTeamSuccess());
 	} catch (error) {
-		dispatch(createTeamFailure(error));
+		dispatch(addTeamFailure(error));
 	}
 };
 
@@ -52,7 +52,7 @@ const getAllTeams = () => dispatch => {
 	dispatch(getAllTeamsRequest());
 
 	try {
-		const teammates = firebase.database().ref('team');
+		const teammates = firebase.database().ref('teams');
 
 		teammates.on('value', snapshot => {
 			let teammatesData = [];
@@ -63,7 +63,7 @@ const getAllTeams = () => dispatch => {
 			}
 
 			teammatesData = Object.keys(snapshot.val()).reduce((acc, key) => {
-				acc.push({ tmId: key, ...snapshot.val()[key] });
+				acc.push({ teamId: key, ...snapshot.val()[key] });
 				return acc;
 			}, []);
 

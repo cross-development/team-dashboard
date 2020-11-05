@@ -7,17 +7,21 @@ import TeamsCard from './TeamsCard';
 //Styles
 import styled from 'styled-components';
 
-const Teams = ({ name, email, teams, onSubmit, onChange }) => (
-	<StyledList>
-		<li>
-			<TeamsForm name={name} email={email} onSubmit={onSubmit} onChange={onChange} />
-		</li>
+const Teams = ({ name, email, teams, onSubmit, onChange }) => {
+	console.log(teams);
 
-		{teams.map(({ name, email, avatar }) => (
-			<TeamsCard key={email} name={name} email={email} avatar={avatar} />
-		))}
-	</StyledList>
-);
+	return (
+		<StyledList>
+			<li>
+				<TeamsForm name={name} email={email} onSubmit={onSubmit} onChange={onChange} />
+			</li>
+
+			{teams.map(({ name, email, avatar }) => (
+				<TeamsCard key={email} name={name} email={email} avatar={avatar} />
+			))}
+		</StyledList>
+	);
+};
 
 Teams.propTypes = {
 	name: PropTypes.string.isRequired,

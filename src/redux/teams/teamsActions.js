@@ -1,9 +1,17 @@
 //Core
 import { createAction } from '@reduxjs/toolkit';
 
-const createTeamRequest = createAction('teams/createTeamRequest');
-const createTeamSuccess = createAction('teams/createTeamSuccess');
-const createTeamFailure = createAction('teams/createTeamFailure');
+const addTeamRequest = createAction('teams/addTeamRequest');
+const addTeamSuccess = createAction('teams/addTeamSuccess');
+const addTeamFailure = createAction('teams/addTeamFailure');
+
+const removeTeamRequest = createAction('teams/removeTeamRequest');
+const removeTeamSuccess = createAction('teams/removeTeamSuccess');
+const removeTeamFailure = createAction('teams/removeTeamFailure');
+
+const getAllTeamsRequest = createAction('teams/getAllTeamsRequest');
+const getAllTeamsSuccess = createAction('teams/getAllTeamsSuccess');
+const getAllTeamsFailure = createAction('teams/getAllTeamsFailure');
 
 const addTeammateRequest = createAction('teams/addTeammateRequest');
 const addTeammateSuccess = createAction('teams/addTeammateSuccess');
@@ -18,9 +26,17 @@ const getTeammatesSuccess = createAction('teams/getTeammatesSuccess');
 const getTeammatesFailure = createAction('teams/getTeammatesFailure');
 
 const teamActions = {
-	createTeamRequest,
-	createTeamSuccess,
-	createTeamFailure,
+	addTeamRequest,
+	addTeamSuccess,
+	addTeamFailure,
+
+	removeTeamRequest,
+	removeTeamSuccess,
+	removeTeamFailure,
+
+	getAllTeamsRequest,
+	getAllTeamsSuccess,
+	getAllTeamsFailure,
 
 	addTeammateRequest,
 	addTeammateSuccess,

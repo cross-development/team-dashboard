@@ -5,8 +5,8 @@ import { StyledControlWrap, StyledNavLink } from './TeamsControls.styles';
 
 const TeamsControls = () => (
 	<StyledControlWrap>
-		<StyledNavLink to="/teams">All</StyledNavLink>
-		<StyledNavLink to="/teammates">My Team</StyledNavLink>
+		<StyledNavLink to="/teams">All Teams</StyledNavLink>
+		<StyledNavLink to="/teammates">My Teams</StyledNavLink>
 	</StyledControlWrap>
 );
 

@@ -32,7 +32,7 @@ const App = () => {
 			<Navbar />
 
 			<Layout>
-				<TeamsNavigate />
+				{user && <TeamsNavigate />}
 
 				<Suspense fallback={<Loader />}>
 					<Switch>
