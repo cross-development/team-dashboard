@@ -25,22 +25,27 @@ const createTeam = (team, uid) => dispatch => {
 	}
 };
 
-const removeTeam = ({ uid, tmId }) => dispatch => {
+const removeTeam = ({ uid, teamId }) => dispatch => {
 	dispatch(removeTeamRequest());
 
 	try {
-		const favMovies = firebase.database().ref('users/' + uid + '/team');
+		firebase
+			.database()
+			.ref('teams/' + teamId)
+			.remove();
+		console.log('object');
 
-		favMovies.once('value', snapshot =>
-			snapshot.forEach(data => {
-				if (data.val().id === tmId) {
-					firebase
-						.database()
-						.ref('users/' + uid + '/team/' + data.key)
-						.remove();
-				}
-			}),
-		);
+		// const teams = firebase.database().ref('teams/');
+		// teams.once('value', snapshot =>
+		// 	snapshot.forEach(data => {
+		// 		if (data.val().uid === uid) {
+		// 			firebase
+		// 				.database()
+		// 				.ref('teams/' + teamId)
+		// 				.remove();
+		// 		}
+		// 	}),
+		// );
 
 		dispatch(removeTeamSuccess());
 	} catch (error) {
@@ -48,6 +53,7 @@ const removeTeam = ({ uid, tmId }) => dispatch => {
 	}
 };
 
+//fixed
 const getAllTeams = () => dispatch => {
 	dispatch(getAllTeamsRequest());
 
@@ -75,12 +81,12 @@ const getAllTeams = () => dispatch => {
 };
 
 //Fixed
-const addTeammate = credentials => dispatch => {
+const addTeammate = ({ teammate, teamId }) => dispatch => {
 	dispatch(addTeammateRequest());
 
 	try {
-		const userCollection = firebase.database().ref('team');
-		userCollection.push(credentials);
+		const userCollection = firebase.database().ref('teams/' + teamId);
+		userCollection.child('teammates').push(teammate);
 
 		dispatch(addTeammateSuccess());
 	} catch (error) {
@@ -111,11 +117,12 @@ const removeTeammate = ({ uid, tmId }) => dispatch => {
 	}
 };
 
-const getTeammates = () => dispatch => {
+//Fixed
+const getTeammates = ({ teamId }) => dispatch => {
 	dispatch(getTeammatesRequest());
 
 	try {
-		const teammates = firebase.database().ref('team');
+		const teammates = firebase.database().ref('teams/' + teamId + '/teammates');
 
 		teammates.on('value', snapshot => {
 			let teammatesData = [];

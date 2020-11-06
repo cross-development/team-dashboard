@@ -15,7 +15,7 @@ const initialState = {
 const LoginPage = () => {
 	const [state, setState] = useState(initialState);
 
-	const { error } = useSelector(state => state);
+	const { error } = useSelector(state => state.auth);
 	const dispatch = useDispatch();
 
 	const handleChangeState = ({ target: { name, value } }) =>

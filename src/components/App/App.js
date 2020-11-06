@@ -9,23 +9,18 @@ import { Loader } from '../Commons';
 //Redux
 import { useSelector, useDispatch } from 'react-redux';
 import { authStateChange } from 'redux/auth/authOperations';
-import { getTeammates } from 'redux/teams/teamsOperations';
 //Routes
 import routes from 'router';
 import PublicRoute from 'router/PublicRoute';
 import PrivateRoute from 'router/PrivateRoute';
 
 const App = () => {
-	const { user } = useSelector(state => state.auth);
+	const { user, loader } = useSelector(state => state.auth);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(authStateChange());
 	}, [dispatch]);
-
-	// useEffect(() => {
-	// 	if (user) dispatch(getTeammates());
-	// }, [dispatch, user]);
 
 	return (
 		<Router>
@@ -34,7 +29,7 @@ const App = () => {
 			<Layout>
 				{user && <TeamsNavigate />}
 
-				<Suspense fallback={<Loader />}>
+				<Suspense fallback={<Loader onLoad={loader} />}>
 					<Switch>
 						{routes.map(route =>
 							route.private ? (

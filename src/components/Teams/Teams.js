@@ -7,17 +7,18 @@ import TeamsCard from './TeamsCard';
 //Styles
 import styled from 'styled-components';
 
-const Teams = ({ name, email, teams, onSubmit, onChange }) => {
+const Teams = ({ name, email, teams, path, onSubmit, onChange }) => {
 	console.log(teams);
-
 	return (
 		<StyledList>
-			<li>
-				<TeamsForm name={name} email={email} onSubmit={onSubmit} onChange={onChange} />
-			</li>
+			{path.slice(1) === 'all-teams' && (
+				<li>
+					<TeamsForm name={name} email={email} onSubmit={onSubmit} onChange={onChange} />
+				</li>
+			)}
 
-			{teams.map(({ name, email, avatar }) => (
-				<TeamsCard key={email} name={name} email={email} avatar={avatar} />
+			{teams.map(team => (
+				<TeamsCard key={team.email} {...team} />
 			))}
 		</StyledList>
 	);

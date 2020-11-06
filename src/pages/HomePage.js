@@ -7,14 +7,13 @@ import { Loader } from 'components/Commons';
 import { useSelector } from 'react-redux';
 
 const HomePage = () => {
-	const { user } = useSelector(state => state.auth);
-	const isLoading = useSelector(state => state.loader);
+	const { user, loader } = useSelector(state => state.auth);
 
 	return (
 		<>
-			{user && <Loader onLoad={isLoading} />}
+			{user && <Loader onLoad={loader} />}
 
-			{!user && isLoading && <Home />}
+			{!user && loader && <Home />}
 		</>
 	);
 };

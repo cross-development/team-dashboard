@@ -1,8 +1,9 @@
 //Core
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
 //Components
 import Teams from 'components/Teams';
-import { Notification } from 'components/Commons';
+import { Notification, Loader } from 'components/Commons';
 //Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { createTeam, getAllTeams } from 'redux/teams/teamsOperations';
@@ -18,13 +19,19 @@ const TeamsPage = () => {
 	const [state, setState] = useState(initialState);
 
 	const dispatch = useDispatch();
-	const { user } = useSelector(state => state.auth);
-	const { error } = useSelector(state => state);
-	const { teams } = useSelector(state => state.teams);
+	const { user, loader: userLoading } = useSelector(state => state.auth);
+	const { teams, error, loader: teamsLoading } = useSelector(state => state.teams);
+	console.log('teams ', teams);
+	const { pathname } = useLocation();
 
 	useEffect(() => {
-		dispatch(getAllTeams());
-	}, [dispatch]);
+		pathname.slice(1) === 'all-teams' && dispatch(getAllTeams());
+	}, [dispatch, pathname]);
+
+	const filteredTeams = useMemo(
+		() => teams.filter(team => (pathname.slice(1) === 'my-teams' ? team.uid === user.uid : team)),
+		[user, pathname, teams],
+	);
 
 	const handleChangeState = ({ target: { name, value } }) =>
 		setState(prevState => ({ ...prevState, [name]: value }));
@@ -43,7 +50,17 @@ const TeamsPage = () => {
 
 	return (
 		<>
-			<Teams {...state} teams={teams} onSubmit={handleSubmit} onChange={handleChangeState} />
+			{teamsLoading && <Loader onLoad={teamsLoading} />}
+
+			{user && !teamsLoading && filteredTeams.length > 0 && (
+				<Teams
+					{...state}
+					path={pathname}
+					teams={filteredTeams}
+					onSubmit={handleSubmit}
+					onChange={handleChangeState}
+				/>
+			)}
 
 			{error && <Notification message={error.message} />}
 		</>
