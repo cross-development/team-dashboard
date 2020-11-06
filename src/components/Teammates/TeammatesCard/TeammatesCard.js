@@ -38,7 +38,7 @@ const TeammatesCard = ({ name, email, avatar, isLiked, onChangeLike }) => (
 TeammatesCard.propTypes = {
 	name: PropTypes.string.isRequired,
 	email: PropTypes.string.isRequired,
-	avatar: PropTypes.string.isRequired,
+	avatar: PropTypes.string,
 	isLiked: PropTypes.bool.isRequired,
 	onChangeLike: PropTypes.func.isRequired,
 };

@@ -7,20 +7,21 @@ import TeammatesCard from './TeammatesCard';
 //Styles
 import styled from 'styled-components';
 
-const Teammates = ({ name, email, avatarRef, onSubmit, onChange, teammates, onChangeLike }) => {
-	// console.log('inTeammates');
-
+// avatarRef
+const Teammates = ({ name, email, isUserTeam, onSubmit, onChange, teammates, onChangeLike }) => {
 	return (
 		<StyledList>
-			<li>
-				<TeammatesForm
-					name={name}
-					email={email}
-					avatarRef={avatarRef}
-					onSubmit={onSubmit}
-					onChange={onChange}
-				/>
-			</li>
+			{isUserTeam && (
+				<li>
+					<TeammatesForm
+						name={name}
+						email={email}
+						// avatarRef={avatarRef}
+						onSubmit={onSubmit}
+						onChange={onChange}
+					/>
+				</li>
+			)}
 
 			{teammates.map(({ name, email, avatar, isLiked }) => (
 				<TeammatesCard
@@ -41,6 +42,7 @@ Teammates.propTypes = {
 	email: PropTypes.string.isRequired,
 	onSubmit: PropTypes.func.isRequired,
 	onChange: PropTypes.func.isRequired,
+	isUserTeam: PropTypes.bool.isRequired,
 	teammates: PropTypes.arrayOf(PropTypes.any),
 	onChangeLike: PropTypes.func.isRequired,
 };

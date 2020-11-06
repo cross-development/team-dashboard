@@ -1,24 +1,24 @@
 //Core
 import React from 'react';
 import PropTypes from 'prop-types';
-//Redux
-import { useSelector, useDispatch } from 'react-redux';
-import { removeTeam } from 'redux/teams/teamsOperations';
 //Styles
-import { FaCheck, FaTrashAlt, FaEye, FaEdit } from 'react-icons/fa';
+import { FaHeart, FaCheck, FaTrashAlt, FaEye, FaEdit } from 'react-icons/fa';
+import { StyledLikeBtn } from './TeamsCard.styles';
 import { StyledName, StyledEmail, StyledControlWrap, StyledButton } from './TeamsCard.styles';
 import { StyledCardItem, StyledImgWrap, StyledAvatar, StyledLink } from './TeamsCard.styles';
 
 import UserAvatar from 'assets/user.png';
 
-const TeamsCard = ({ name, email, avatar, uid, teamId }) => {
-	const { uid: userId } = useSelector(state => state.auth);
-	const dispatch = useDispatch();
+const TeamsCard = ({ userId, team, onRemoveTeamCard, onChangeLike }) => {
+	const { uid, teamId, avatar, name, email } = team;
 
-	const removeTeamCard = ({ target: { id: teamId } }) => dispatch(removeTeam({ teamId }));
-
+	// isLiked
 	return (
 		<StyledCardItem>
+			<StyledLikeBtn type="button" isLiked={false} onClick={onChangeLike}>
+				<FaHeart />
+			</StyledLikeBtn>
+
 			<StyledImgWrap>
 				<StyledAvatar src={avatar || UserAvatar} />
 			</StyledImgWrap>
@@ -40,7 +40,7 @@ const TeamsCard = ({ name, email, avatar, uid, teamId }) => {
 				)}
 
 				{userId === uid ? (
-					<StyledButton type="button" id={teamId} onClick={removeTeamCard}>
+					<StyledButton type="button" id={teamId} onClick={onRemoveTeamCard}>
 						<FaTrashAlt />
 						Delete
 					</StyledButton>
@@ -56,11 +56,16 @@ const TeamsCard = ({ name, email, avatar, uid, teamId }) => {
 };
 
 TeamsCard.propTypes = {
-	uid: PropTypes.string.isRequired,
-	name: PropTypes.string.isRequired,
-	email: PropTypes.string.isRequired,
-	avatar: PropTypes.string.isRequired,
-	teamId: PropTypes.string.isRequired,
+	userId: PropTypes.string.isRequired,
+	team: PropTypes.shape({
+		uid: PropTypes.string.isRequired,
+		teamId: PropTypes.string.isRequired,
+		avatar: PropTypes.string.isRequired,
+		name: PropTypes.string.isRequired,
+		email: PropTypes.string.isRequired,
+	}).isRequired,
+	onRemoveTeamCard: PropTypes.func.isRequired,
+	onChangeLike: PropTypes.func.isRequired,
 };
 
 export default TeamsCard;
