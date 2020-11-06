@@ -1,43 +1,43 @@
 //Core
-import { combineReducers } from 'redux';
-import { createReducer } from '@reduxjs/toolkit';
-//Redux
-import authActions from './authActions';
+import { createSlice } from '@reduxjs/toolkit';
 
-const user = createReducer(null, {
-	[authActions.authStateChangeSuccess]: (state, { payload }) => payload,
-	[authActions.singUpSuccess]: (state, { payload }) => payload,
-	[authActions.signInSuccess]: (state, { payload }) => payload,
-	[authActions.signOutSuccess]: () => null,
-});
+const state = {
+	uid: null,
+	displayName: '',
+	photoURL: null,
+	error: null,
+	loading: false,
+};
 
-const loader = createReducer(false, {
-	[authActions.signInRequest]: () => true,
-	[authActions.signInSuccess]: () => false,
-	[authActions.signInFailure]: () => false,
+export const authSlice = createSlice({
+	name: 'auth',
 
-	[authActions.signOutRequest]: () => true,
-	[authActions.signOutSuccess]: () => false,
-	[authActions.signOutFailure]: () => false,
+	initialState: state,
 
-	[authActions.signUpRequest]: () => true,
-	[authActions.signUpSuccess]: () => false,
-	[authActions.signUpFailure]: () => false,
+	reducers: {
+		setUserProfileSuccess: (state, { payload }) => ({
+			...state,
+			uid: payload.uid,
+			displayName: payload.displayName,
+		}),
 
-	[authActions.authStateChangeRequest]: () => true,
-	[authActions.authStateChangeSuccess]: () => false,
-	[authActions.authStateChangeFailure]: () => false,
-});
+		updateProfileSuccess: (state, { payload }) => ({
+			...state,
+			uid: payload.uid,
+			photoURL: payload.photoURL,
+			displayName: payload.displayName,
+		}),
 
-const error = createReducer(null, {
-	[authActions.authStateChangeFailure]: (state, { payload }) => payload,
-	[authActions.singUpFailure]: (state, { payload }) => payload,
-	[authActions.signOutFailure]: (state, { payload }) => payload,
-	[authActions.signInFailure]: (state, { payload }) => payload,
-});
+		setAuthLoadingSuccess: (state, { payload }) => ({
+			...state,
+			loading: payload,
+		}),
 
-export default combineReducers({
-	user,
-	loader,
-	error,
+		setAuthErrorSuccess: (state, { payload }) => ({
+			...state,
+			error: payload,
+		}),
+
+		authSignOutSuccess: () => state,
+	},
 });

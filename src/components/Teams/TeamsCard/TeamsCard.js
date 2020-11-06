@@ -12,8 +12,10 @@ import { StyledCardItem, StyledImgWrap, StyledAvatar, StyledLink } from './Teams
 import UserAvatar from 'assets/user.png';
 
 const TeamsCard = ({ name, email, avatar, uid, teamId }) => {
-	const { user } = useSelector(state => state.auth);
+	const { uid: userId } = useSelector(state => state.auth);
 	const dispatch = useDispatch();
+
+	const removeTeamCard = ({ target: { id: teamId } }) => dispatch(removeTeam({ teamId }));
 
 	return (
 		<StyledCardItem>
@@ -25,7 +27,7 @@ const TeamsCard = ({ name, email, avatar, uid, teamId }) => {
 			<StyledEmail>{email}</StyledEmail>
 
 			<StyledControlWrap>
-				{user.uid === uid ? (
+				{userId === uid ? (
 					<StyledLink to={`/teams/${teamId}`}>
 						<FaEdit />
 						Edit
@@ -37,8 +39,8 @@ const TeamsCard = ({ name, email, avatar, uid, teamId }) => {
 					</StyledButton>
 				)}
 
-				{user.uid === uid ? (
-					<StyledButton type="button" onClick={() => dispatch(removeTeam({ uid, teamId }))}>
+				{userId === uid ? (
+					<StyledButton type="button" id={teamId} onClick={removeTeamCard}>
 						<FaTrashAlt />
 						Delete
 					</StyledButton>

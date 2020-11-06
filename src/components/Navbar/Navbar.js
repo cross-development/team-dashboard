@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 const Navbar = () => {
-	const { user } = useSelector(state => state.auth);
+	const { uid } = useSelector(state => state.auth);
 
 	const handleChangeForm = query => {
 		console.log(query);
@@ -21,9 +21,9 @@ const Navbar = () => {
 		<StyledHeader>
 			<Logo />
 
-			{user && <SearchPanel onSubmit={handleChangeForm} />}
+			{uid && <SearchPanel onSubmit={handleChangeForm} />}
 
-			{user ? <UserMenu /> : <AuthMenu />}
+			{uid ? <UserMenu /> : <AuthMenu />}
 		</StyledHeader>
 	);
 };

@@ -7,12 +7,6 @@ import ReactLoader from 'react-loader-spinner';
 import { LoaderWrapperDiv } from './Loader.styles';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
-//Custom css
-// const beatCss = css`
-// 	display: block;
-// 	margin: calc(100vh * 0.4) auto;
-// `;
-
 const Loader = ({ onLoad }) => (
 	<LoaderWrapperDiv>
 		<ReactLoader type="Puff" color="#00BFFF" height={80} width={80} visible={onLoad} />

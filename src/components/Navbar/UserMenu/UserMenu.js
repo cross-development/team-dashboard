@@ -9,7 +9,7 @@ import { FaChevronDown } from 'react-icons/fa';
 import { StylesContainer, StyledImg, StyledName, StyledDropdown } from './UserMenu.styles';
 
 const UserMenu = () => {
-	const { user } = useSelector(state => state.auth);
+	const { displayName } = useSelector(state => state.auth);
 	const dispatch = useDispatch();
 
 	const handleSignOutUser = () => dispatch(signOutUser());
@@ -18,7 +18,7 @@ const UserMenu = () => {
 		<StylesContainer>
 			<StyledImg src={UserAvatar} />
 
-			<StyledName>{user.displayName}</StyledName>
+			<StyledName>{displayName}</StyledName>
 
 			<StyledDropdown onClick={handleSignOutUser}>
 				<FaChevronDown />

@@ -1,12 +1,12 @@
 //Core
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 //Components
 import Teams from 'components/Teams';
 import { Notification, Loader } from 'components/Commons';
 //Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { createTeam, getAllTeams } from 'redux/teams/teamsOperations';
+import { createTeam } from 'redux/teams/teamsOperations';
 
 import teamAvatar from 'assets/team.png';
 
@@ -19,18 +19,14 @@ const TeamsPage = () => {
 	const [state, setState] = useState(initialState);
 
 	const dispatch = useDispatch();
-	const { user, loader: userLoading } = useSelector(state => state.auth);
-	const { teams, error, loader: teamsLoading } = useSelector(state => state.teams);
-	console.log('teams ', teams);
+	const { uid } = useSelector(state => state.auth);
+	const { teams, error, loading: teamsLoading } = useSelector(state => state.teams);
+
 	const { pathname } = useLocation();
 
-	useEffect(() => {
-		pathname.slice(1) === 'all-teams' && dispatch(getAllTeams());
-	}, [dispatch, pathname]);
-
 	const filteredTeams = useMemo(
-		() => teams.filter(team => (pathname.slice(1) === 'my-teams' ? team.uid === user.uid : team)),
-		[user, pathname, teams],
+		() => teams.filter(team => (pathname.slice(1) === 'my-teams' ? team.uid === uid : team)),
+		[uid, pathname, teams],
 	);
 
 	const handleChangeState = ({ target: { name, value } }) =>
@@ -44,7 +40,7 @@ const TeamsPage = () => {
 			avatar: teamAvatar,
 		};
 
-		dispatch(createTeam(team, user.uid));
+		dispatch(createTeam(team, uid));
 		setState(initialState);
 	};
 
@@ -52,7 +48,7 @@ const TeamsPage = () => {
 		<>
 			{teamsLoading && <Loader onLoad={teamsLoading} />}
 
-			{user && !teamsLoading && filteredTeams.length > 0 && (
+			{uid && !teamsLoading && filteredTeams.length > 0 && (
 				<Teams
 					{...state}
 					path={pathname}

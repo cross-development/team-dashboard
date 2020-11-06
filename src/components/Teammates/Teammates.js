@@ -7,37 +7,41 @@ import TeammatesCard from './TeammatesCard';
 //Styles
 import styled from 'styled-components';
 
-const Teammates = ({ name, email, avatarRef, onSubmit, onChange, teamMembers, onChangeLike }) => (
-	<StyledList>
-		<li>
-			<TeammatesForm
-				name={name}
-				email={email}
-				avatarRef={avatarRef}
-				onSubmit={onSubmit}
-				onChange={onChange}
-			/>
-		</li>
+const Teammates = ({ name, email, avatarRef, onSubmit, onChange, teammates, onChangeLike }) => {
+	// console.log('inTeammates');
 
-		{teamMembers.map(({ name, email, avatar, isLiked }) => (
-			<TeammatesCard
-				key={email}
-				name={name}
-				email={email}
-				avatar={avatar}
-				isLiked={isLiked}
-				onChangeLike={onChangeLike}
-			/>
-		))}
-	</StyledList>
-);
+	return (
+		<StyledList>
+			<li>
+				<TeammatesForm
+					name={name}
+					email={email}
+					avatarRef={avatarRef}
+					onSubmit={onSubmit}
+					onChange={onChange}
+				/>
+			</li>
+
+			{teammates.map(({ name, email, avatar, isLiked }) => (
+				<TeammatesCard
+					key={email}
+					name={name}
+					email={email}
+					avatar={avatar}
+					isLiked={isLiked}
+					onChangeLike={onChangeLike}
+				/>
+			))}
+		</StyledList>
+	);
+};
 
 Teammates.propTypes = {
 	name: PropTypes.string.isRequired,
 	email: PropTypes.string.isRequired,
 	onSubmit: PropTypes.func.isRequired,
 	onChange: PropTypes.func.isRequired,
-	teamMembers: PropTypes.arrayOf(PropTypes.any),
+	teammates: PropTypes.arrayOf(PropTypes.any),
 	onChangeLike: PropTypes.func.isRequired,
 };
 

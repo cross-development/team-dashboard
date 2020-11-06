@@ -1,14 +1,18 @@
 //Database
 import firebase from 'firebase';
 //Redux
-import authActions from './authActions';
+import { authSlice } from './authReducers';
 
-const { singUpRequest, signInRequest, signOutRequest, authStateChangeRequest } = authActions;
-const { singUpSuccess, signInSuccess, signOutSuccess, authStateChangeSuccess } = authActions;
-const { singUpFailure, signInFailure, signOutFailure, authStateChangeFailure } = authActions;
+const {
+	authSignOutSuccess,
+	setAuthErrorSuccess,
+	updateProfileSuccess,
+	setUserProfileSuccess,
+	setAuthLoadingSuccess,
+} = authSlice.actions;
 
 const signUpUser = ({ name, email, password }) => async dispatch => {
-	dispatch(singUpRequest());
+	dispatch(setAuthLoadingSuccess(true));
 
 	try {
 		await firebase.auth().createUserWithEmailAndPassword(email, password);
@@ -18,52 +22,76 @@ const signUpUser = ({ name, email, password }) => async dispatch => {
 
 		const { uid, displayName } = await firebase.auth().currentUser;
 
-		dispatch(singUpSuccess({ uid, displayName }));
+		dispatch(setUserProfileSuccess({ uid, displayName }));
 	} catch (error) {
-		dispatch(singUpFailure(error));
+		dispatch(setAuthErrorSuccess(error));
+	} finally {
+		dispatch(setAuthLoadingSuccess(false));
 	}
 };
 
 const signInUser = ({ email, password }) => async dispatch => {
-	dispatch(signInRequest());
+	dispatch(setAuthLoadingSuccess(true));
 
 	try {
 		await firebase.auth().signInWithEmailAndPassword(email, password);
 		const { uid, displayName, photoURL } = await firebase.auth().currentUser;
 
-		dispatch(signInSuccess({ uid, displayName, photoURL }));
+		dispatch(updateProfileSuccess({ uid, displayName, photoURL }));
 	} catch (error) {
-		dispatch(signInFailure(error));
+		dispatch(setAuthErrorSuccess(error));
+	} finally {
+		dispatch(setAuthLoadingSuccess(false));
 	}
 };
 
 const signOutUser = () => async dispatch => {
-	dispatch(signOutRequest());
+	dispatch(setAuthLoadingSuccess(true));
 
 	try {
 		await firebase
 			.auth()
 			.signOut()
-			.then(() => dispatch(signOutSuccess()));
+			.then(() => dispatch(authSignOutSuccess()));
 	} catch (error) {
-		dispatch(signOutFailure(error));
+		dispatch(setAuthErrorSuccess(error));
+	} finally {
+		dispatch(setAuthLoadingSuccess(false));
 	}
 };
 
 const authStateChange = () => async dispatch => {
-	dispatch(authStateChangeRequest());
+	dispatch(setAuthLoadingSuccess(true));
 
 	try {
 		await firebase.auth().onAuthStateChanged(currentUser => {
 			if (currentUser) {
 				const { uid, displayName, photoURL } = currentUser;
 
-				dispatch(authStateChangeSuccess({ uid, displayName, photoURL }));
+				dispatch(updateProfileSuccess({ uid, displayName, photoURL }));
 			}
 		});
 	} catch (error) {
-		dispatch(authStateChangeFailure(error));
+		dispatch(setAuthErrorSuccess(error));
+	} finally {
+		dispatch(setAuthLoadingSuccess(false));
 	}
 };
 
-export { signUpUser, signInUser, signOutUser, authStateChange };
+const updateUserProfile = ({ fullName, photoURL: photo }) => async dispatch => {
+	dispatch(setAuthLoadingSuccess(true));
+	try {
+		const user = await firebase.auth().currentUser;
+		await user.updateProfile({ displayName: fullName, photoURL: photo });
+
+		const { uid, displayName, photoURL } = await firebase.auth().currentUser;
+
+		dispatch(updateProfileSuccess({ uid, displayName, photoURL }));
+		dispatch(setAuthLoadingSuccess(false));
+	} catch (error) {
+		dispatch(setAuthErrorSuccess(error));
+		dispatch(setAuthLoadingSuccess(false));
+	}
+};
+
+export { signUpUser, signInUser, signOutUser, authStateChange, updateUserProfile };

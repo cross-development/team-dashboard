@@ -1,55 +1,41 @@
 //Core
-import { combineReducers } from 'redux';
-import { createReducer } from '@reduxjs/toolkit';
-//Redux
-import teamsActions from './teamsActions';
+import { createSlice } from '@reduxjs/toolkit';
 
-const teams = createReducer([], {
-	[teamsActions.getAllTeamsSuccess]: (state, { payload }) => [...payload],
-});
+const state = {
+	teams: [],
+	error: null,
+	loading: false,
+};
 
-const teammates = createReducer([], {
-	[teamsActions.getTeammatesSuccess]: (state, { payload }) => [...payload],
-});
+export const teamsSlice = createSlice({
+	name: 'teams',
 
-const loader = createReducer(false, {
-	[teamsActions.createTeamRequest]: () => true,
-	[teamsActions.createTeamSuccess]: () => false,
-	[teamsActions.createTeamFailure]: () => false,
+	initialState: state,
 
-	[teamsActions.removeTeamRequest]: () => true,
-	[teamsActions.removeTeamSuccess]: () => false,
-	[teamsActions.removeTeamFailure]: () => false,
+	reducers: {
+		getAllTeamsSuccess: (state, { payload }) => ({
+			...state,
+			teams: [...payload],
+		}),
 
-	[teamsActions.getAllTeamsRequest]: () => true,
-	[teamsActions.getAllTeamsSuccess]: () => false,
-	[teamsActions.getAllTeamsFailure]: () => false,
+		addTeamSuccess: (state, { payload }) => ({
+			...state,
+		}),
 
-	[teamsActions.addTeammateRequest]: () => true,
-	[teamsActions.addTeammateSuccess]: () => false,
-	[teamsActions.addTeammateFailure]: () => false,
+		removeTeamSuccess: (state, { payload }) => ({
+			...state,
+		}),
 
-	[teamsActions.removeTeammateRequest]: () => true,
-	[teamsActions.removeTeammateSuccess]: () => false,
-	[teamsActions.removeTeammateFailure]: () => false,
+		setTeamsLoadingSuccess: (state, { payload }) => ({
+			...state,
+			loading: payload,
+		}),
 
-	[teamsActions.getTeammatesRequest]: () => true,
-	[teamsActions.getTeammatesSuccess]: () => false,
-	[teamsActions.getTeammatesFailure]: () => false,
-});
+		setTeamsErrorSuccess: (state, { payload }) => ({
+			...state,
+			error: payload,
+		}),
 
-const error = createReducer(null, {
-	[teamsActions.createTeamFailure]: (state, { payload }) => payload,
-	[teamsActions.removeTeamFailure]: (state, { payload }) => payload,
-	[teamsActions.getAllTeamsFailure]: (state, { payload }) => payload,
-	[teamsActions.addTeammateFailure]: (state, { payload }) => payload,
-	[teamsActions.removeTeammateFailure]: (state, { payload }) => payload,
-	[teamsActions.getTeammatesFailure]: (state, { payload }) => payload,
-});
-
-export default combineReducers({
-	teams,
-	teammates,
-	loader,
-	error,
+		// clearAllTeammates: () => state,
+	},
 });

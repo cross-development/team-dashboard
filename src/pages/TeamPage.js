@@ -1,12 +1,12 @@
 //Core
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 //Components
 import Teammates from 'components/Teammates';
 import { Notification } from 'components/Commons';
 //Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { addTeammate, getTeammates } from 'redux/teams/teamsOperations';
+import { addTeammate, getTeammates } from 'redux/teammates/teammatesOperations';
 
 const initialState = {
 	name: '',
@@ -21,11 +21,20 @@ const TeammatesPage = () => {
 	const { teamId } = useParams();
 
 	const dispatch = useDispatch();
-	const { teammates, error } = useSelector(state => state.teams);
+	const { teams } = useSelector(state => state.teams);
+	const { error } = useSelector(state => state.teammates);
 
-	useEffect(() => {
-		dispatch(getTeammates({ teamId }));
-	}, [dispatch, teamId]);
+	const memoTeammates = useMemo(
+		() =>
+			teams
+				.filter(team => team.teamId === teamId)
+				.map(({ teammates }) => teammates || [])
+				.reduce((acc, key) => {
+					acc.push(...Object.values(key));
+					return acc;
+				}, []),
+		[teams, teamId],
+	);
 
 	const handleChangeState = ({ target: { name, value } }) =>
 		setState(prevState => ({ ...prevState, [name]: value }));
@@ -50,7 +59,7 @@ const TeammatesPage = () => {
 			<Teammates
 				{...state}
 				avatarRef={avatarRef}
-				teamMembers={teammates}
+				teammates={memoTeammates}
 				onSubmit={handleSubmit}
 				onChange={handleChangeState}
 				onChangeLike={handleChangeLike}

@@ -8,7 +8,6 @@ import TeamsCard from './TeamsCard';
 import styled from 'styled-components';
 
 const Teams = ({ name, email, teams, path, onSubmit, onChange }) => {
-	console.log(teams);
 	return (
 		<StyledList>
 			{path.slice(1) === 'all-teams' && (
