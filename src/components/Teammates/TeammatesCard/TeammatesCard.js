@@ -1,45 +1,65 @@
 //Core
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
+//Redux
+import { useSelector } from 'react-redux';
 //Styles
-import { FaHeart, FaEye, FaClipboardList } from 'react-icons/fa';
-import { StyledName, StyledEmail, StyledControlWrap, StyledButton } from './TeammatesCard.styles';
+import { FaHeart, FaEye, FaClipboardList, FaCommentDots } from 'react-icons/fa';
+import { StyledName, StyledEmail, StyledControlWrap, StyledLink } from './TeammatesCard.styles';
 import { StyledCardItem, StyledLikeBtn, StyledImgWrap, StyledAvatar } from './TeammatesCard.styles';
 
 import UserAvatar from 'assets/user.png';
 
-const TeammatesCard = ({ name, email, avatar, isLiked, onChangeLike }) => (
-	<StyledCardItem>
-		<StyledLikeBtn type="button" isLiked={isLiked} onClick={onChangeLike}>
-			<FaHeart />
-		</StyledLikeBtn>
+const TeammatesCard = ({ teammateId, teammate, onChangeLike }) => {
+	const { name, email, avatar, isLiked, userId } = teammate;
 
-		<StyledImgWrap>
-			<StyledAvatar src={avatar || UserAvatar} />
-		</StyledImgWrap>
+	const { uid } = useSelector(state => state.auth);
+	const { teamId } = useParams();
 
-		<StyledName>{name}</StyledName>
-		<StyledEmail>{email}</StyledEmail>
+	return (
+		<StyledCardItem>
+			<StyledLikeBtn type="button" isLiked={isLiked} onClick={onChangeLike}>
+				<FaHeart />
+			</StyledLikeBtn>
 
-		<StyledControlWrap>
-			<StyledButton>
-				<FaClipboardList />
-				Assign
-			</StyledButton>
+			<StyledImgWrap>
+				<StyledAvatar src={avatar || UserAvatar} />
+			</StyledImgWrap>
 
-			<StyledButton>
-				<FaEye />
-				View
-			</StyledButton>
-		</StyledControlWrap>
-	</StyledCardItem>
-);
+			<StyledName>{name}</StyledName>
+			<StyledEmail>{email}</StyledEmail>
+
+			<StyledControlWrap>
+				{userId === uid ? (
+					<StyledLink to={`/teams/${teamId}/${teammateId}/assign`}>
+						<FaClipboardList />
+						Assign
+					</StyledLink>
+				) : (
+					<StyledLink to={`/teams/${teamId}/${teammateId}/messages`}>
+						<FaCommentDots />
+						Message
+					</StyledLink>
+				)}
+
+				<StyledLink to={`/teams/${teamId}/${teammateId}`}>
+					<FaEye />
+					View
+				</StyledLink>
+			</StyledControlWrap>
+		</StyledCardItem>
+	);
+};
 
 TeammatesCard.propTypes = {
-	name: PropTypes.string.isRequired,
-	email: PropTypes.string.isRequired,
-	avatar: PropTypes.string,
-	isLiked: PropTypes.bool.isRequired,
+	teammate: PropTypes.shape({
+		name: PropTypes.string.isRequired,
+		email: PropTypes.string.isRequired,
+		isLiked: PropTypes.bool.isRequired,
+		userId: PropTypes.string.isRequired,
+	}).isRequired,
+	teammateId: PropTypes.string.isRequired,
 	onChangeLike: PropTypes.func.isRequired,
 };
 

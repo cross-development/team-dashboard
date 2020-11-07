@@ -14,35 +14,43 @@ const initialState = {
 };
 
 const TeammatesPage = () => {
-	const [state, setState] = useState(initialState);
-	const [isLiked, setIsLiked] = useState(false);
-
-	const { teamId } = useParams();
 	// const avatarRef = useRef(null);
-
 	const dispatch = useDispatch();
+	const { teamId } = useParams();
 	const { uid } = useSelector(state => state.auth);
 	const { teams } = useSelector(state => state.teams);
 	const { error } = useSelector(state => state.teammates);
+
+	const [state, setState] = useState(initialState);
+
+	const handleChangeState = ({ target: { name, value } }) =>
+		setState(prevState => ({ ...prevState, [name]: value }));
+
+	const [isLiked, setIsLiked] = useState(false);
+
+	const handleChangeLike = () => setIsLiked(prevState => !prevState);
 
 	const memoTeammates = useMemo(
 		() =>
 			teams
 				.filter(team => team.teamId === teamId)
-				.map(({ teammates }) => teammates || [])
-				.reduce((acc, key) => {
-					acc.push(...Object.values(key));
+				.reduce((acc, item) => {
+					if (item.teammates) {
+						const teammate = Object.keys(item.teammates).map(key => ({
+							teammateId: key,
+							userId: item.uid,
+							...item.teammates[key],
+						}));
+
+						acc.push(...teammate);
+					}
+
 					return acc;
 				}, []),
 		[teams, teamId],
 	);
 
 	const memoTeam = useMemo(() => teams.find(team => team.teamId === teamId), [teams, teamId]);
-
-	const handleChangeState = ({ target: { name, value } }) =>
-		setState(prevState => ({ ...prevState, [name]: value }));
-
-	const handleChangeLike = () => setIsLiked(prevState => !prevState);
 
 	const handleSubmit = e => {
 		e.preventDefault();

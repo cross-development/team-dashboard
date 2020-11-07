@@ -23,13 +23,11 @@ const Teammates = ({ name, email, isUserTeam, onSubmit, onChange, teammates, onC
 				</li>
 			)}
 
-			{teammates.map(({ name, email, avatar, isLiked }) => (
+			{teammates.map(({ teammateId, ...teammate }) => (
 				<TeammatesCard
-					key={email}
-					name={name}
-					email={email}
-					avatar={avatar}
-					isLiked={isLiked}
+					key={teammateId}
+					teammate={teammate}
+					teammateId={teammateId}
 					onChangeLike={onChangeLike}
 				/>
 			))}

@@ -1,5 +1,6 @@
 //Core
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const StyledCardItem = styled.li`
 	display: flex;
@@ -85,7 +86,7 @@ export const StyledControlWrap = styled.div`
 	margin-top: 0.5rem;
 `;
 
-export const StyledButton = styled.button`
+export const StyledLink = styled(Link)`
 	display: flex;
 	font-size: 14px;
 	align-items: center;
@@ -100,6 +101,7 @@ export const StyledButton = styled.button`
 	outline: none;
 	width: 45%;
 	margin: 0 auto;
+	text-decoration: none;
 
 	&:hover {
 		color: #fff;
