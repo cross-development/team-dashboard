@@ -22,12 +22,20 @@ export const StyledTeamAvatar = styled.div`
 	transition: all 300ms linear;
 	width: 40px;
 	height: 40px;
+	padding: 0.3rem;
 	box-shadow: 0 0 8px #507bfc;
 	margin-right: 1rem;
 
 	&:hover {
 		box-shadow: 0 10px 20px 0 rgba(80, 123, 252, 0.8);
 	}
+`;
+
+export const StyledAvatarImg = styled.img`
+	display: block;
+	width: 100%;
+	height: auto;
+	border-radius: 50px;
 `;
 
 export const StyledTitleWrap = styled.div`

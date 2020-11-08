@@ -32,7 +32,7 @@ const routes = [
 		exact: true,
 		private: true,
 		restricted: false,
-		component: lazy(() => import('pages/TeamsPage' /* webpackChunkName: "all-teams-page"*/)),
+		component: lazy(() => import('pages/TeamsPage' /* webpackChunkName: "teams-page"*/)),
 	},
 	{
 		path: '/my-teams',
@@ -40,7 +40,7 @@ const routes = [
 		exact: true,
 		private: true,
 		restricted: false,
-		component: lazy(() => import('pages/TeamsPage' /* webpackChunkName: "my-teams-page"*/)),
+		component: lazy(() => import('pages/TeamsPage' /* webpackChunkName: "teams-page"*/)),
 	},
 	{
 		path: '/teams/:teamId',
@@ -56,7 +56,7 @@ const routes = [
 		exact: false,
 		private: true,
 		restricted: false,
-		component: lazy(() => import('pages/TeamMemberPage' /* webpackChunkName: "teammate-page" */)),
+		component: lazy(() => import('pages/TeammatePage' /* webpackChunkName: "teammate-page" */)),
 	},
 ];
 

@@ -8,8 +8,8 @@ import { useSelector } from 'react-redux';
 import { FaHeart, FaEye, FaClipboardList, FaCommentDots } from 'react-icons/fa';
 import { StyledName, StyledEmail, StyledControlWrap, StyledLink } from './TeammatesCard.styles';
 import { StyledCardItem, StyledLikeBtn, StyledImgWrap, StyledAvatar } from './TeammatesCard.styles';
-
-import UserAvatar from 'assets/user.png';
+//Public assets
+const defaultAvatar = `${process.env.PUBLIC_URL}/avatars/unnamed.png`;
 
 const TeammatesCard = ({ teammateId, teammate, onChangeLike }) => {
 	const { name, email, avatar, isLiked, userId } = teammate;
@@ -24,7 +24,7 @@ const TeammatesCard = ({ teammateId, teammate, onChangeLike }) => {
 			</StyledLikeBtn>
 
 			<StyledImgWrap>
-				<StyledAvatar src={avatar || UserAvatar} />
+				<StyledAvatar src={avatar || defaultAvatar} />
 			</StyledImgWrap>
 
 			<StyledName>{name}</StyledName>

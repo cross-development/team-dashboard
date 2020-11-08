@@ -12,6 +12,7 @@ export const StyledControlWrap = styled.div`
 	border-radius: 100px;
 	background-color: transparent;
 	overflow: visible;
+	margin: 0 0 0 auto;
 `;
 
 export const StyledNavLink = styled(NavLink)`

@@ -1,5 +1,5 @@
 //Core
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 //Components
 import Teams from 'components/Teams';
@@ -7,8 +7,8 @@ import { Notification, Loader } from 'components/Commons';
 //Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { createTeam } from 'redux/teams/teamsOperations';
-
-import teamAvatar from 'assets/team.png';
+//Services
+import { uploadTeamAvatarToServer } from 'services/storageApi';
 
 const initialState = {
 	name: '',
@@ -16,6 +16,7 @@ const initialState = {
 };
 
 const TeamsPage = () => {
+	const avatarRef = useRef(null);
 	const [state, setState] = useState(initialState);
 	const [isLiked, setIsLiked] = useState(false);
 
@@ -35,27 +36,31 @@ const TeamsPage = () => {
 
 	const handleChangeLike = () => setIsLiked(prevState => !prevState);
 
-	const handleSubmit = e => {
+	const handleSubmit = async e => {
 		e.preventDefault();
+
+		const avatar = avatarRef.current.files[0];
+		const avatarURI = avatar ? await uploadTeamAvatarToServer({ avatar }) : '';
 
 		const team = {
 			...state,
 			isLiked,
-			avatar: teamAvatar,
+			avatar: avatarURI,
 		};
 
-		dispatch(createTeam(team, uid));
-		setState(initialState);
+		await dispatch(createTeam(team, uid));
+		await setState(initialState);
 	};
 
 	return (
 		<>
 			{teamsLoading && <Loader onLoad={teamsLoading} />}
 
-			{uid && !teamsLoading && filteredTeams.length > 0 && (
+			{uid && !teamsLoading && (
 				<Teams
 					{...state}
 					path={pathname}
+					avatarRef={avatarRef}
 					teams={filteredTeams}
 					onChangeLike={handleChangeLike}
 					onSubmit={handleSubmit}
@@ -69,3 +74,4 @@ const TeamsPage = () => {
 };
 
 export default TeamsPage;
+// && filteredTeams.length > 0

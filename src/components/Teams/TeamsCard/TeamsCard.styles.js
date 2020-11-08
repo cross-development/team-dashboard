@@ -58,6 +58,7 @@ export const StyledAvatar = styled.img`
 	width: 100%;
 	height: auto;
 	border-radius: 50px;
+	box-shadow: 0px 0px 2px 0px #707070;
 `;
 
 export const StyledName = styled.p`

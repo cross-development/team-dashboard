@@ -6,7 +6,7 @@ import { FaUsers } from 'react-icons/fa';
 import { StyledTitle, StylesForm, StyledImgWrap, StyledFileInput } from './TeamsForm.styles';
 import { StyledLabel, StyledInput, StyledButton, StyledFileLabel } from './TeamsForm.styles';
 
-const TeamsForm = ({ name, email, onSubmit, onChange }) => {
+const TeamsForm = ({ name, avatarRef, email, onSubmit, onChange }) => {
 	return (
 		<StylesForm onSubmit={onSubmit}>
 			<StyledTitle>Add New Team</StyledTitle>
@@ -17,6 +17,7 @@ const TeamsForm = ({ name, email, onSubmit, onChange }) => {
 						type="file"
 						name="avatar"
 						id="avatarFile"
+						ref={avatarRef}
 						accept="image/jpeg,image/png"
 					/>
 					<FaUsers />

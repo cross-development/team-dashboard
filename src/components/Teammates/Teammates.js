@@ -7,8 +7,16 @@ import TeammatesCard from './TeammatesCard';
 //Styles
 import styled from 'styled-components';
 
-// avatarRef
-const Teammates = ({ name, email, isUserTeam, onSubmit, onChange, teammates, onChangeLike }) => {
+const Teammates = ({
+	name,
+	email,
+	avatarRef,
+	isUserTeam,
+	onSubmit,
+	onChange,
+	teammates,
+	onChangeLike,
+}) => {
 	return (
 		<StyledList>
 			{isUserTeam && (
@@ -16,7 +24,7 @@ const Teammates = ({ name, email, isUserTeam, onSubmit, onChange, teammates, onC
 					<TeammatesForm
 						name={name}
 						email={email}
-						// avatarRef={avatarRef}
+						avatarRef={avatarRef}
 						onSubmit={onSubmit}
 						onChange={onChange}
 					/>

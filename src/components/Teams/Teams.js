@@ -10,17 +10,31 @@ import { removeTeam } from 'redux/teams/teamsOperations';
 //Styles
 import styled from 'styled-components';
 
-const Teams = ({ name, email, teams, path, onSubmit, onChange, onChangeLike }) => {
+import { removeAvatarFromServer } from 'services/storageApi';
+
+const Teams = ({ name, email, avatarRef, teams, path, onSubmit, onChange, onChangeLike }) => {
 	const { uid: userId } = useSelector(state => state.auth);
+	const { teams: teamsList } = useSelector(state => state.teams);
 	const dispatch = useDispatch();
 
-	const removeTeamCard = ({ target: { id: teamId } }) => dispatch(removeTeam({ teamId }));
+	const removeTeamCard = ({ target: { id: teamId } }) => {
+		const { avatar: avatarURI } = teamsList.find(team => team.teamId === teamId);
+
+		removeAvatarFromServer({ avatarURI });
+		dispatch(removeTeam({ teamId }));
+	};
 
 	return (
 		<StyledList>
 			{path.slice(1) === 'all-teams' && (
 				<li>
-					<TeamsForm name={name} email={email} onSubmit={onSubmit} onChange={onChange} />
+					<TeamsForm
+						name={name}
+						email={email}
+						avatarRef={avatarRef}
+						onSubmit={onSubmit}
+						onChange={onChange}
+					/>
 				</li>
 			)}
 

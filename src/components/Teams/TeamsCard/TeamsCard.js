@@ -6,8 +6,8 @@ import { FaHeart, FaCheck, FaTrashAlt, FaEye, FaEdit } from 'react-icons/fa';
 import { StyledLikeBtn } from './TeamsCard.styles';
 import { StyledName, StyledEmail, StyledControlWrap, StyledButton } from './TeamsCard.styles';
 import { StyledCardItem, StyledImgWrap, StyledAvatar, StyledLink } from './TeamsCard.styles';
-
-import UserAvatar from 'assets/user.png';
+//Public assets
+const defaultAvatar = `${process.env.PUBLIC_URL}/avatars/users-group.png`;
 
 const TeamsCard = ({ userId, team, onRemoveTeamCard, onChangeLike }) => {
 	const { uid, teamId, avatar, name, email } = team;
@@ -20,7 +20,7 @@ const TeamsCard = ({ userId, team, onRemoveTeamCard, onChangeLike }) => {
 			</StyledLikeBtn>
 
 			<StyledImgWrap>
-				<StyledAvatar src={avatar || UserAvatar} />
+				<StyledAvatar src={avatar || defaultAvatar} />
 			</StyledImgWrap>
 
 			<StyledName>{name}</StyledName>

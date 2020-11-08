@@ -1,20 +1,19 @@
 //Core
 import React from 'react';
 //Styles
-import { FaRocket } from 'react-icons/fa';
-import { StyledTeamAvatar, StyledTitleWrap } from './TeamsInfo.styles';
+import { StyledTeamAvatar, StyledTitleWrap, StyledAvatarImg } from './TeamsInfo.styles';
 import { StyledInfoWrap, StyledTitle, StyledTeamName } from './TeamsInfo.styles';
 
-const TeamsInfo = () => {
+const TeamsInfo = ({ title, avatar }) => {
 	return (
 		<StyledInfoWrap>
 			<StyledTeamAvatar>
-				<FaRocket />
+				<StyledAvatarImg src={avatar} />
 			</StyledTeamAvatar>
 
 			<StyledTitleWrap>
 				<StyledTitle>Team Members</StyledTitle>
-				<StyledTeamName>Rocket</StyledTeamName>
+				<StyledTeamName>{title}</StyledTeamName>
 			</StyledTitleWrap>
 		</StyledInfoWrap>
 	);

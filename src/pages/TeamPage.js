@@ -1,5 +1,5 @@
 //Core
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 //Components
 import Teammates from 'components/Teammates';
@@ -7,6 +7,8 @@ import { Notification } from 'components/Commons';
 //Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { addTeammate } from 'redux/teammates/teammatesOperations';
+//Services
+import { uploadTeammateAvatarToServer } from 'services/storageApi';
 
 const initialState = {
 	name: '',
@@ -14,7 +16,7 @@ const initialState = {
 };
 
 const TeammatesPage = () => {
-	// const avatarRef = useRef(null);
+	const avatarRef = useRef(null);
 	const dispatch = useDispatch();
 	const { teamId } = useParams();
 	const { uid } = useSelector(state => state.auth);
@@ -52,25 +54,27 @@ const TeammatesPage = () => {
 
 	const memoTeam = useMemo(() => teams.find(team => team.teamId === teamId), [teams, teamId]);
 
-	const handleSubmit = e => {
+	const handleSubmit = async e => {
 		e.preventDefault();
+
+		const avatar = avatarRef.current.files[0];
+		const avatarURI = avatar ? await uploadTeammateAvatarToServer({ avatar }) : '';
 
 		const teammate = {
 			...state,
 			isLiked,
-			avatar: null,
-			// avatar: avatarRef.current.value,
+			avatar: avatarURI,
 		};
 
-		dispatch(addTeammate({ teammate, teamId }));
-		setState(initialState);
+		await dispatch(addTeammate({ teammate, teamId }));
+		await setState(initialState);
 	};
 
 	return (
 		<>
 			<Teammates
 				{...state}
-				// avatarRef={avatarRef}
+				avatarRef={avatarRef}
 				teammates={memoTeammates}
 				onSubmit={handleSubmit}
 				onChange={handleChangeState}
