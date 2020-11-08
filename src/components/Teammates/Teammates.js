@@ -7,41 +7,25 @@ import TeammatesCard from './TeammatesCard';
 //Styles
 import styled from 'styled-components';
 
-const Teammates = ({
-	name,
-	email,
-	avatarRef,
-	isUserTeam,
-	onSubmit,
-	onChange,
-	teammates,
-	onChangeLike,
-}) => {
-	return (
-		<StyledList>
-			{isUserTeam && (
-				<li>
-					<TeammatesForm
-						name={name}
-						email={email}
-						avatarRef={avatarRef}
-						onSubmit={onSubmit}
-						onChange={onChange}
-					/>
-				</li>
-			)}
-
-			{teammates.map(({ teammateId, ...teammate }) => (
-				<TeammatesCard
-					key={teammateId}
-					teammate={teammate}
-					teammateId={teammateId}
-					onChangeLike={onChangeLike}
+const Teammates = ({ name, email, avatarRef, isUserTeam, onSubmit, onChange, teammates }) => (
+	<StyledList>
+		{isUserTeam && (
+			<li>
+				<TeammatesForm
+					name={name}
+					email={email}
+					avatarRef={avatarRef}
+					onSubmit={onSubmit}
+					onChange={onChange}
 				/>
-			))}
-		</StyledList>
-	);
-};
+			</li>
+		)}
+
+		{teammates.map(({ teammateId, ...teammate }) => (
+			<TeammatesCard key={teammateId} teammate={teammate} teammateId={teammateId} />
+		))}
+	</StyledList>
+);
 
 Teammates.propTypes = {
 	name: PropTypes.string.isRequired,
@@ -50,7 +34,6 @@ Teammates.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	isUserTeam: PropTypes.bool.isRequired,
 	teammates: PropTypes.arrayOf(PropTypes.any),
-	onChangeLike: PropTypes.func.isRequired,
 };
 
 const StyledList = styled.ul`

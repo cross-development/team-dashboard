@@ -1,6 +1,9 @@
 //Core
 import React from 'react';
 import PropTypes from 'prop-types';
+//Redux
+import { useDispatch } from 'react-redux';
+import { updateTeam } from 'redux/teams/teamsOperations';
 //Styles
 import { FaHeart, FaCheck, FaTrashAlt, FaEye, FaEdit } from 'react-icons/fa';
 import { StyledLikeBtn } from './TeamsCard.styles';
@@ -9,13 +12,16 @@ import { StyledCardItem, StyledImgWrap, StyledAvatar, StyledLink } from './Teams
 //Public assets
 const defaultAvatar = `${process.env.PUBLIC_URL}/avatars/users-group.png`;
 
-const TeamsCard = ({ userId, team, onRemoveTeamCard, onChangeLike }) => {
-	const { uid, teamId, avatar, name, email } = team;
+const TeamsCard = ({ userId, team, onRemoveTeamCard }) => {
+	const { uid, teamId, avatar, name, email, isLiked } = team;
 
-	// isLiked
+	const dispatch = useDispatch();
+
+	const handleChangeLike = () => dispatch(updateTeam({ teamId, isTeamLiked: !isLiked }));
+
 	return (
 		<StyledCardItem>
-			<StyledLikeBtn type="button" isLiked={false} onClick={onChangeLike}>
+			<StyledLikeBtn type="button" isLiked={isLiked} onClick={handleChangeLike}>
 				<FaHeart />
 			</StyledLikeBtn>
 
@@ -65,7 +71,6 @@ TeamsCard.propTypes = {
 		email: PropTypes.string.isRequired,
 	}).isRequired,
 	onRemoveTeamCard: PropTypes.func.isRequired,
-	onChangeLike: PropTypes.func.isRequired,
 };
 
 export default TeamsCard;

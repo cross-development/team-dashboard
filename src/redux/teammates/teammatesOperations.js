@@ -52,6 +52,22 @@ const removeTeammate = ({ uid, tmId }) => dispatch => {
 	}
 };
 
+//fixed
+const updateTeammate = ({ teamId, teammateId, isTeammateLiked }) => dispatch => {
+	dispatch(setTeammatesLoadingSuccess(true));
+
+	try {
+		const teammate = firebase.database().ref('teams/' + teamId + '/teammates/' + teammateId);
+
+		teammate.update({ isLiked: isTeammateLiked });
+		dispatch(addTeammateSuccess());
+	} catch (error) {
+		dispatch(setTeammatesErrorSuccess(error));
+	} finally {
+		dispatch(setTeammatesLoadingSuccess(false));
+	}
+};
+
 //Fixed
 const getTeammates = ({ teamId }) => dispatch => {
 	dispatch(setTeammatesLoadingSuccess(true));
@@ -81,4 +97,4 @@ const getTeammates = ({ teamId }) => dispatch => {
 	}
 };
 
-export { addTeammate, removeTeammate, getTeammates };
+export { addTeammate, removeTeammate, updateTeammate, getTeammates };

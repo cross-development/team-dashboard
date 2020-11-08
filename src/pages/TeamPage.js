@@ -28,10 +28,6 @@ const TeammatesPage = () => {
 	const handleChangeState = ({ target: { name, value } }) =>
 		setState(prevState => ({ ...prevState, [name]: value }));
 
-	const [isLiked, setIsLiked] = useState(false);
-
-	const handleChangeLike = () => setIsLiked(prevState => !prevState);
-
 	const memoTeammates = useMemo(
 		() =>
 			teams
@@ -62,7 +58,7 @@ const TeammatesPage = () => {
 
 		const teammate = {
 			...state,
-			isLiked,
+			isLiked: false,
 			avatar: avatarURI,
 		};
 
@@ -78,7 +74,6 @@ const TeammatesPage = () => {
 				teammates={memoTeammates}
 				onSubmit={handleSubmit}
 				onChange={handleChangeState}
-				onChangeLike={handleChangeLike}
 				isUserTeam={memoTeam.uid === uid}
 			/>
 

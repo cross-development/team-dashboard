@@ -7,12 +7,12 @@ import TeamsCard from './TeamsCard';
 //Redux
 import { useSelector, useDispatch } from 'react-redux';
 import { removeTeam } from 'redux/teams/teamsOperations';
+//Services
+import { removeAvatarFromServer } from 'services/storageApi';
 //Styles
 import styled from 'styled-components';
 
-import { removeAvatarFromServer } from 'services/storageApi';
-
-const Teams = ({ name, email, avatarRef, teams, path, onSubmit, onChange, onChangeLike }) => {
+const Teams = ({ name, email, avatarRef, teams, path, onSubmit, onChange }) => {
 	const { uid: userId } = useSelector(state => state.auth);
 	const { teams: teamsList } = useSelector(state => state.teams);
 	const dispatch = useDispatch();
@@ -39,13 +39,7 @@ const Teams = ({ name, email, avatarRef, teams, path, onSubmit, onChange, onChan
 			)}
 
 			{teams.map(team => (
-				<TeamsCard
-					team={team}
-					userId={userId}
-					key={team.email}
-					onChangeLike={onChangeLike}
-					onRemoveTeamCard={removeTeamCard}
-				/>
+				<TeamsCard key={team.email} team={team} userId={userId} onRemoveTeamCard={removeTeamCard} />
 			))}
 		</StyledList>
 	);

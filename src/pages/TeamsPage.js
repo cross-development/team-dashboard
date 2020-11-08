@@ -18,7 +18,6 @@ const initialState = {
 const TeamsPage = () => {
 	const avatarRef = useRef(null);
 	const [state, setState] = useState(initialState);
-	const [isLiked, setIsLiked] = useState(false);
 
 	const dispatch = useDispatch();
 	const { uid } = useSelector(state => state.auth);
@@ -34,8 +33,6 @@ const TeamsPage = () => {
 	const handleChangeState = ({ target: { name, value } }) =>
 		setState(prevState => ({ ...prevState, [name]: value }));
 
-	const handleChangeLike = () => setIsLiked(prevState => !prevState);
-
 	const handleSubmit = async e => {
 		e.preventDefault();
 
@@ -44,7 +41,7 @@ const TeamsPage = () => {
 
 		const team = {
 			...state,
-			isLiked,
+			isLiked: false,
 			avatar: avatarURI,
 		};
 
@@ -62,7 +59,6 @@ const TeamsPage = () => {
 					path={pathname}
 					avatarRef={avatarRef}
 					teams={filteredTeams}
-					onChangeLike={handleChangeLike}
 					onSubmit={handleSubmit}
 					onChange={handleChangeState}
 				/>

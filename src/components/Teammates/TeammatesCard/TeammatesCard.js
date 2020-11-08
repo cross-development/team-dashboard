@@ -3,7 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 //Redux
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateTeammate } from 'redux/teammates/teammatesOperations';
 //Styles
 import { FaHeart, FaEye, FaClipboardList, FaCommentDots } from 'react-icons/fa';
 import { StyledName, StyledEmail, StyledControlWrap, StyledLink } from './TeammatesCard.styles';
@@ -11,15 +12,19 @@ import { StyledCardItem, StyledLikeBtn, StyledImgWrap, StyledAvatar } from './Te
 //Public assets
 const defaultAvatar = `${process.env.PUBLIC_URL}/avatars/unnamed.png`;
 
-const TeammatesCard = ({ teammateId, teammate, onChangeLike }) => {
+const TeammatesCard = ({ teammateId, teammate }) => {
 	const { name, email, avatar, isLiked, userId } = teammate;
 
 	const { uid } = useSelector(state => state.auth);
+	const dispatch = useDispatch();
 	const { teamId } = useParams();
+
+	const handleChangeLike = () =>
+		dispatch(updateTeammate({ teamId, teammateId, isTeammateLiked: !isLiked }));
 
 	return (
 		<StyledCardItem>
-			<StyledLikeBtn type="button" isLiked={isLiked} onClick={onChangeLike}>
+			<StyledLikeBtn type="button" isLiked={isLiked} onClick={handleChangeLike}>
 				<FaHeart />
 			</StyledLikeBtn>
 
@@ -60,7 +65,6 @@ TeammatesCard.propTypes = {
 		userId: PropTypes.string.isRequired,
 	}).isRequired,
 	teammateId: PropTypes.string.isRequired,
-	onChangeLike: PropTypes.func.isRequired,
 };
 
 export default TeammatesCard;

@@ -45,6 +45,22 @@ const removeTeam = ({ teamId }) => dispatch => {
 	}
 };
 
+//Fixed
+const updateTeam = ({ teamId, isTeamLiked }) => dispatch => {
+	dispatch(setTeamsLoadingSuccess(true));
+
+	try {
+		const team = firebase.database().ref('teams/' + teamId);
+
+		team.update({ isLiked: isTeamLiked });
+		dispatch(addTeamSuccess());
+	} catch (error) {
+		dispatch(setTeamsErrorSuccess(error));
+	} finally {
+		dispatch(setTeamsLoadingSuccess(false));
+	}
+};
+
 //fixed
 const getAllTeams = () => dispatch => {
 	dispatch(setTeamsLoadingSuccess(true));
@@ -74,4 +90,4 @@ const getAllTeams = () => dispatch => {
 	}
 };
 
-export { createTeam, removeTeam, getAllTeams };
+export { createTeam, removeTeam, updateTeam, getAllTeams };
