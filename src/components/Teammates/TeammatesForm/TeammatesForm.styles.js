@@ -25,15 +25,15 @@ export const StyledImgWrap = styled.div`
 	width: 70px;
 	height: 70px;
 	border-radius: 50px;
-	/* background-color: ${({ isAccepted }) => (isAccepted ? '507bfc' : 'transparent')}; */
-	/* box-shadow: 0px 0px 2px 0px #707070; */
-	/* margin-bottom: 1rem; */
+	background-color: ${({ isAccepted }) => (isAccepted ? '#507bfc' : 'transparent')};
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	font-size: 28px;
-	color: #98a0a6;
+	color: ${({ isAccepted }) => (isAccepted ? '#ffffff' : '#98a0a6')};
 	cursor: pointer;
+	box-shadow: ${({ isAccepted }) =>
+		isAccepted ? '0px 0px 20px 5px rgba(80, 123, 252, 0.8)' : '0px 0px 2px 0px #707070'};
 `;
 
 export const StyledLabel = styled.label`
@@ -49,14 +49,10 @@ export const StyledInput = styled.input`
 	display: block;
 	color: #171718;
 	font-size: 1.1rem;
-	/* padding: 6px 20px; */
-	/* margin-top: 0.2rem; */
 	border: none;
-	/* border-bottom: 2px solid rgba(80, 123, 252, 0.3); */
 	width: 100%;
 	outline: 0;
 	text-align: center;
-	/* border-radius: 100px; */
 
 	&::placeholder {
 		color: #b8bfc4;
@@ -135,8 +131,7 @@ export const StyledFileInput = styled.input`
 export const StyledFileLabel = styled.label`
 	max-width: 80%;
 	cursor: pointer;
-	overflow: hidden;
+	/* overflow: hidden; */
 	border-radius: 50px;
-	box-shadow: 0px 0px 2px 0px #707070;
 	margin-bottom: 1rem;
 `;

@@ -1,5 +1,5 @@
 //Core
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 //Styles
 import { FaUser } from 'react-icons/fa';
@@ -7,12 +7,22 @@ import { StyledTitle, StylesForm, StyledImgWrap, StyledFileInput } from './Teamm
 import { StyledLabel, StyledInput, StyledButton, StyledFileLabel } from './TeammatesForm.styles';
 
 const TeammatesForm = ({ name, email, avatarRef, onSubmit, onChange }) => {
+	const [isAccepted, setIsAccepted] = useState(false);
+
+	const setInputAccept = e => {
+		if (e.target.files.length > 0) setIsAccepted(true);
+	};
+
+	useEffect(() => {
+		avatarRef.current.addEventListener('change', setInputAccept);
+	}, [avatarRef]);
+
 	return (
 		<StylesForm onSubmit={onSubmit}>
 			<StyledTitle>Add New Member</StyledTitle>
 
 			<StyledFileLabel htmlFor="avatarFile">
-				<StyledImgWrap>
+				<StyledImgWrap isAccepted={isAccepted}>
 					<StyledFileInput
 						type="file"
 						name="avatar"
