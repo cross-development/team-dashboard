@@ -53,10 +53,18 @@ const routes = [
 	{
 		path: '/teams/:teamId/:teammateId',
 		label: 'Teammate',
-		exact: false,
+		exact: true,
 		private: true,
 		restricted: false,
 		component: lazy(() => import('pages/TeammatePage' /* webpackChunkName: "teammate-page" */)),
+	},
+	{
+		path: '/profile',
+		label: 'Profile',
+		exact: true,
+		private: true,
+		restricted: false,
+		component: lazy(() => import('pages/ProfilePage' /* webpackChunkName: "profile-page"*/)),
 	},
 ];
 
