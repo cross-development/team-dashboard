@@ -26,9 +26,9 @@ export const StyledContainer = styled.div`
 
 export const StyledTitle = styled.h2`
 	grid-area: title;
-	border-bottom: 3px solid #f5f7fa;
 `;
 
 export const StyledSocialLinks = styled.div`
 	grid-area: links;
+	border-top: 3px solid #f5f7fa;
 `;

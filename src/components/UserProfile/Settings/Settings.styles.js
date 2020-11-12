@@ -9,6 +9,36 @@ export const StyledContainer = styled.div`
 	gap: 0px 0px;
 	grid-template-areas:
 		'settingsTitle settingsTitle settingsTitle'
+		'generalForm generalForm generalForm'
+		'generalForm generalForm generalForm'
+		'generalForm generalForm generalForm'
+		'generalForm generalForm generalForm'
+		'generalForm generalForm generalForm'
+		'generalForm generalForm generalForm'
+		'generalForm generalForm generalForm'
+		'generalForm generalForm generalForm'
+		'generalForm generalForm generalForm'
+		'generalForm generalForm generalForm'
+		'generalForm generalForm generalForm';
+	grid-area: settings;
+`;
+
+export const StyledTitle = styled.h2`
+	grid-area: settingsTitle;
+	color: #98a0a6;
+	font-weight: 400;
+	font-size: 20px;
+	line-height: 24px;
+	margin: auto;
+`;
+
+export const StyledGeneralForm = styled.form`
+	height: 100%;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(11, 1fr);
+	gap: 0px 0px;
+	grid-template-areas:
 		'general general general'
 		'general general general'
 		'general general general'
@@ -20,17 +50,7 @@ export const StyledContainer = styled.div`
 		'phone phone phone'
 		'updateBtn updateBtn updateBtn'
 		'updateBtn updateBtn updateBtn';
-	grid-area: settings;
-`;
-
-export const StyledTitle = styled.h2`
-	grid-area: settingsTitle;
-	border-bottom: 3px solid #f5f7fa;
-`;
-
-export const StyledGeneralInfo = styled.div`
-	grid-area: general;
-	border-bottom: 3px solid #f5f7fa;
+	grid-area: generalForm;
 `;
 
 export const StyledBirthdayInfo = styled.div`

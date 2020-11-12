@@ -22,7 +22,7 @@ const UserProfile = () => {
 const StyledContainer = styled.div`
 	background-color: #fff;
 	border-radius: 10px;
-	height: 72vh;
+	height: auto;
 	max-width: 96%;
 	margin: 0 auto;
 	display: grid;

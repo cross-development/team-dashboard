@@ -1,25 +1,29 @@
 //Core
 import React from 'react';
 import PropTypes from 'prop-types';
+//Components
+import GeneralInfo from './GeneralInfo';
 //Styles
-import { StyledContainer, StyledTitle } from './Settings.styles';
-import { StyledGeneralInfo, StyledBirthdayInfo } from './Settings.styles';
+import { StyledContainer, StyledTitle, StyledGeneralForm } from './Settings.styles';
 import { StyledLocationInfo, StyledPhoneInfo, StyledAcceptWrap } from './Settings.styles';
+import { StyledBirthdayInfo } from './Settings.styles';
 
 const Settings = props => {
 	return (
 		<StyledContainer>
-			<StyledTitle></StyledTitle>
+			<StyledTitle>Edit Your Personal Settings</StyledTitle>
 
-			<StyledGeneralInfo></StyledGeneralInfo>
+			<StyledGeneralForm>
+				<GeneralInfo />
 
-			<StyledBirthdayInfo></StyledBirthdayInfo>
+				<StyledBirthdayInfo></StyledBirthdayInfo>
 
-			<StyledLocationInfo></StyledLocationInfo>
+				<StyledLocationInfo></StyledLocationInfo>
 
-			<StyledPhoneInfo></StyledPhoneInfo>
+				<StyledPhoneInfo></StyledPhoneInfo>
 
-			<StyledAcceptWrap></StyledAcceptWrap>
+				<StyledAcceptWrap></StyledAcceptWrap>
+			</StyledGeneralForm>
 		</StyledContainer>
 	);
 };
