@@ -1,0 +1,14 @@
+[
+	{ "name": "January", "count": 1, "days": 31, "leap": 31 },
+	{ "name": "February", "count": 2, "days": 28, "leap": 29 },
+	{ "name": "March", "count": 3, "days": 31, "leap": 31 },
+	{ "name": "April", "count": 4, "days": 30, "leap": 30 },
+	{ "name": "May", "count": 5, "days": 31, "leap": 31 },
+	{ "name": "June", "count": 6, "days": 30, "leap": 30 },
+	{ "name": "July", "count": 7, "days": 31, "leap": 31 },
+	{ "name": "August", "count": 8, "days": 31, "leap": 31 },
+	{ "name": "September", "count": 9, "days": 30, "leap": 30 },
+	{ "name": "October", "count": 10, "days": 31, "leap": 31 },
+	{ "name": "November", "count": 11, "days": 30, "leap": 30 },
+	{ "name": "December", "count": 12, "days": 31, "leap": 31 }
+]
