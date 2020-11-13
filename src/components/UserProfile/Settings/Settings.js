@@ -3,12 +3,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 //Components
 import GeneralInfo from './GeneralInfo';
+import BirthdayInfo from './BirthdayInfo';
+import LocationInfo from './LocationInfo';
+import PhoneInfo from './PhoneInfo';
 //Styles
 import { StyledContainer, StyledTitle, StyledGeneralForm } from './Settings.styles';
-import { StyledLocationInfo, StyledPhoneInfo, StyledAcceptWrap } from './Settings.styles';
-import { StyledBirthdayInfo } from './Settings.styles';
+import { StyledAcceptWrap, StyledButton } from './Settings.styles';
 
-const Settings = props => {
+const Settings = () => {
 	return (
 		<StyledContainer>
 			<StyledTitle>Edit Your Personal Settings</StyledTitle>
@@ -16,13 +18,15 @@ const Settings = props => {
 			<StyledGeneralForm>
 				<GeneralInfo />
 
-				<StyledBirthdayInfo></StyledBirthdayInfo>
+				<BirthdayInfo />
 
-				<StyledLocationInfo></StyledLocationInfo>
+				<LocationInfo />
 
-				<StyledPhoneInfo></StyledPhoneInfo>
+				<PhoneInfo />
 
-				<StyledAcceptWrap></StyledAcceptWrap>
+				<StyledAcceptWrap>
+					<StyledButton>Update information</StyledButton>
+				</StyledAcceptWrap>
 			</StyledGeneralForm>
 		</StyledContainer>
 	);

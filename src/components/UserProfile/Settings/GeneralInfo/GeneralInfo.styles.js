@@ -18,6 +18,7 @@ export const StyledLabel = styled.label`
 	justify-content: space-between;
 	align-items: center;
 	width: 100%;
+	color: #5b6378;
 `;
 
 export const StyledInput = styled.input`

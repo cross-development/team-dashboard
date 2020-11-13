@@ -53,21 +53,26 @@ export const StyledGeneralForm = styled.form`
 	grid-area: generalForm;
 `;
 
-export const StyledBirthdayInfo = styled.div`
-	grid-area: birthday;
-	border-bottom: 3px solid #f5f7fa;
-`;
-
-export const StyledLocationInfo = styled.div`
-	grid-area: location;
-	border-bottom: 3px solid #f5f7fa;
-`;
-
-export const StyledPhoneInfo = styled.div`
-	grid-area: phone;
-	border-bottom: 3px solid #f5f7fa;
-`;
-
 export const StyledAcceptWrap = styled.div`
 	grid-area: updateBtn;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
+export const StyledButton = styled.button`
+	background-color: #507bfc;
+	border: none;
+	color: #fff;
+	border-radius: 100px;
+	padding: 12px 0;
+	cursor: pointer;
+	transition: all 250ms linear;
+	box-shadow: 0 0 14px #507bfc;
+	outline: none;
+	width: 40%;
+
+	&:hover {
+		box-shadow: 0px 10px 20px 0px rgba(80, 123, 252, 0.8);
+	}
 `;
