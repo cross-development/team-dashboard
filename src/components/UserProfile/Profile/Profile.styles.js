@@ -5,14 +5,18 @@ import { FaQuoteLeft } from 'react-icons/fa';
 export const StyledContainer = styled.div`
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	grid-template-rows: repeat(8, 1fr);
+	grid-template-rows: repeat(12, 1fr);
 	gap: 0px 0px;
 	grid-template-areas:
+		'profileTitle profileTitle profileTitle'
 		'avatar avatar avatar'
 		'avatar avatar avatar'
 		'avatar avatar avatar'
 		'avatar avatar avatar'
 		'avatar avatar avatar'
+		'avatar avatar avatar'
+		'avatar avatar avatar'
+		'slogan slogan slogan'
 		'slogan slogan slogan'
 		'slogan slogan slogan'
 		'slogan slogan slogan';
@@ -22,6 +26,7 @@ export const StyledContainer = styled.div`
 
 export const StyledProfileWrap = styled.div`
 	grid-area: avatar;
+	border-top: 3px solid #f5f7fa;
 	border-bottom: 3px solid #f5f7fa;
 	display: flex;
 	flex-direction: column;
@@ -30,10 +35,12 @@ export const StyledProfileWrap = styled.div`
 `;
 
 export const StyledTitle = styled.h2`
+	grid-area: profileTitle;
 	color: #98a0a6;
 	font-size: 20px;
 	font-weight: 400;
 	line-height: 24px;
+	margin: auto;
 `;
 
 export const StyledAvatarWrap = styled.div`

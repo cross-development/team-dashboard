@@ -10,9 +10,9 @@ import { StyledSloganWrap, StyledSloganTitle, StyledSlogan } from './Profile.sty
 const Profile = () => {
 	return (
 		<StyledContainer>
-			<StyledProfileWrap>
-				<StyledTitle>Your Profile</StyledTitle>
+			<StyledTitle>Your Profile</StyledTitle>
 
+			<StyledProfileWrap>
 				<StyledAvatarWrap>
 					<StyledAvatar src="https://www.android-gameworld.ru/_nw/23/08794392.png" />
 				</StyledAvatarWrap>

@@ -9,7 +9,7 @@ export const StyledGeneralInfo = styled.div`
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	padding: 1.5rem 4rem;
+	padding: 1.5rem 2rem;
 `;
 
 export const StyledLabel = styled.label`

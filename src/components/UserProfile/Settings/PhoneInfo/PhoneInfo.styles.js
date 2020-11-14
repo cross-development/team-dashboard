@@ -6,7 +6,7 @@ export const StyledPhoneInfo = styled.div`
 	border-bottom: 3px solid #f5f7fa;
 	display: flex;
 	justify-content: space-between;
-	padding: 1.5rem 4rem;
+	padding: 1.5rem 2rem;
 `;
 
 export const StyledLabel = styled.label`
