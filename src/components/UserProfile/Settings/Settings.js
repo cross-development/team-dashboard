@@ -25,7 +25,7 @@ const Settings = () => {
 				<PhoneInfo />
 
 				<StyledAcceptWrap>
-					<StyledButton>Update information</StyledButton>
+					<StyledButton>Save and Update</StyledButton>
 				</StyledAcceptWrap>
 			</StyledGeneralForm>
 		</StyledContainer>

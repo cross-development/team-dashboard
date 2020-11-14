@@ -36,5 +36,5 @@ export const StyledSelect = styled.select`
 	border: none;
 	box-shadow: 0px 0px 2px 0px #707070;
 	outline: none;
-	margin: 1rem 0 0;
+	margin: 0.8rem 0 0;
 `;
