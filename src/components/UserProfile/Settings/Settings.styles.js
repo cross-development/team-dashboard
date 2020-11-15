@@ -32,7 +32,7 @@ export const StyledTitle = styled.h2`
 	margin: auto;
 `;
 
-export const StyledGeneralForm = styled.form`
+export const StyledSettingsContainer = styled.div`
 	height: 100%;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
@@ -66,6 +66,7 @@ export const StyledButton = styled.button`
 	color: #fff;
 	border-radius: 100px;
 	padding: 12px 0;
+	font-size: 14px;
 	cursor: pointer;
 	transition: all 250ms linear;
 	box-shadow: 0 0 14px #507bfc;

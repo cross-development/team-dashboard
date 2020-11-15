@@ -78,18 +78,18 @@ const authStateChange = () => async dispatch => {
 	}
 };
 
-const updateUserProfile = ({ fullName, photoURL: photo }) => async dispatch => {
+const updateUserProfile = ({ avatar }) => async dispatch => {
 	dispatch(setAuthLoadingSuccess(true));
 	try {
 		const user = await firebase.auth().currentUser;
-		await user.updateProfile({ displayName: fullName, photoURL: photo });
+		await user.updateProfile({ photoURL: avatar });
 
 		const { uid, displayName, photoURL } = await firebase.auth().currentUser;
 
 		dispatch(updateProfileSuccess({ uid, displayName, photoURL }));
-		dispatch(setAuthLoadingSuccess(false));
 	} catch (error) {
 		dispatch(setAuthErrorSuccess(error));
+	} finally {
 		dispatch(setAuthLoadingSuccess(false));
 	}
 };

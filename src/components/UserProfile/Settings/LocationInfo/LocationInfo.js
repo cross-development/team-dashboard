@@ -7,26 +7,45 @@ import { StyledSelect } from './LocationInfo.styles';
 //Data
 import countries from 'data/countries.json';
 
-const LocationInfo = () => {
-	return (
-		<StyledLocationInfo>
-			<StyledLabel>
-				Country
-				<StyledSelect value="" onChange="">
-					{countries.map(({ name }) => (
-						<option value={name}>{name}</option>
-					))}
-				</StyledSelect>
-			</StyledLabel>
+const LocationInfo = ({ commonInfo, onChangeLocationInfo }) => (
+	<StyledLocationInfo>
+		<StyledLabel>
+			Country
+			<StyledSelect name="country" value={commonInfo.country} onChange={onChangeLocationInfo}>
+				{countries.map(({ name }) => (
+					<option key={name} value={name}>
+						{name}
+					</option>
+				))}
+			</StyledSelect>
+		</StyledLabel>
 
-			<StyledLabel>
-				State/Province/Region
-				<StyledInput type="text" value="" onChange="" autoComplete="off" placeholder="Type here" />
-			</StyledLabel>
-		</StyledLocationInfo>
-	);
+		<StyledLabel>
+			State/Province/Region
+			<StyledInput
+				type="text"
+				name="region"
+				autoComplete="off"
+				placeholder="Type here"
+				value={commonInfo.region}
+				onChange={onChangeLocationInfo}
+			/>
+		</StyledLabel>
+	</StyledLocationInfo>
+);
+
+LocationInfo.propTypes = {
+	onChangeLocationInfo: PropTypes.func.isRequired,
+	commonInfo: PropTypes.shape({
+		name: PropTypes.string.isRequired,
+		title: PropTypes.string.isRequired,
+		email: PropTypes.string.isRequired,
+		region: PropTypes.string.isRequired,
+		country: PropTypes.string.isRequired,
+		birthday: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]).isRequired,
+		postalCode: PropTypes.string.isRequired,
+		phoneNumber: PropTypes.string.isRequired,
+	}).isRequired,
 };
-
-LocationInfo.propTypes = {};
 
 export default LocationInfo;

@@ -47,8 +47,10 @@ export const StyledAvatarWrap = styled.div`
 	width: 40%;
 	height: auto;
 	border-radius: 50%;
-	border: 1px solid #dee1e6;
 	padding: 0.4rem;
+	background-color: ${({ isAccepted }) => (isAccepted ? '#507bfc' : 'transparent')};
+	box-shadow: ${({ isAccepted }) =>
+		isAccepted ? '0px 0px 20px 5px rgba(80, 123, 252, 0.8)' : '0px 0px 2px 0px #707070'};
 `;
 
 export const StyledAvatar = styled.img`
@@ -65,21 +67,32 @@ export const StyledName = styled.p`
 	font-weight: 400;
 `;
 
-export const StyledButton = styled.button`
+export const StyledFileLabel = styled.label`
 	background-color: #507bfc;
 	border: none;
 	color: #fff;
 	border-radius: 100px;
 	padding: 12px 0;
+	font-size: 14px;
 	cursor: pointer;
 	transition: all 250ms linear;
 	box-shadow: 0 0 14px #507bfc;
 	outline: none;
-	width: 40%;
+	text-align: center;
+	width: 50%;
 
 	&:hover {
 		box-shadow: 0px 10px 20px 0px rgba(80, 123, 252, 0.8);
 	}
+`;
+
+export const StyledFileInput = styled.input`
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
 `;
 
 export const StyledSloganWrap = styled.div`

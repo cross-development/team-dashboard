@@ -21,7 +21,7 @@ const TeamsForm = ({ name, avatarRef, email, onSubmit, onChange }) => {
 		<StylesForm onSubmit={onSubmit}>
 			<StyledTitle>Add New Team</StyledTitle>
 
-			<StyledFileLabel htmlFor="avatarFile">
+			<StyledFileLabel>
 				<StyledImgWrap isAccepted={isAccepted}>
 					<StyledFileInput
 						type="file"

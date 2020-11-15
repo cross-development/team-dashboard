@@ -1,25 +1,46 @@
 //Core
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+//Assets
+import DefaultAvatar from 'assets/defaultAvatar.png';
 //Styles
-import { StyledIconQuote } from './Profile.styles';
-import { StyledName, StyledAvatar, StyledTitle, StyledButton } from './Profile.styles';
-import { StyledContainer, StyledProfileWrap, StyledAvatarWrap } from './Profile.styles';
+import { StyledIconQuote, StyledFileLabel } from './Profile.styles';
 import { StyledSloganWrap, StyledSloganTitle, StyledSlogan } from './Profile.styles';
+import { StyledContainer, StyledProfileWrap, StyledAvatarWrap } from './Profile.styles';
+import { StyledName, StyledAvatar, StyledTitle, StyledFileInput } from './Profile.styles';
 
-const Profile = () => {
+const Profile = ({ avatar, avatarRef }) => {
+	const [isAccepted, setIsAccepted] = useState(false);
+
+	const setInputAccept = e => {
+		if (e.target.files.length > 0) setIsAccepted(true);
+	};
+
+	useEffect(() => {
+		avatarRef.current.addEventListener('change', setInputAccept);
+	}, [avatarRef]);
+
 	return (
 		<StyledContainer>
 			<StyledTitle>Your Profile</StyledTitle>
 
 			<StyledProfileWrap>
-				<StyledAvatarWrap>
-					<StyledAvatar src="https://www.android-gameworld.ru/_nw/23/08794392.png" />
+				<StyledAvatarWrap isAccepted={isAccepted}>
+					<StyledAvatar src={avatar || DefaultAvatar} />
 				</StyledAvatarWrap>
 
 				<StyledName>John Doe</StyledName>
 
-				<StyledButton type="button">Upload New Avatar</StyledButton>
+				<StyledFileLabel>
+					Upload New Avatar
+					<StyledFileInput
+						type="file"
+						name="avatar"
+						id="avatarFile"
+						ref={avatarRef}
+						accept="image/jpeg,image/png"
+					/>
+				</StyledFileLabel>
 			</StyledProfileWrap>
 
 			<StyledSloganWrap>

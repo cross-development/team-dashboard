@@ -64,44 +64,4 @@ export const StyledInput = styled.input`
 		font: inherit;
 		color: #b8bfc4;
 	}
-
-	&::-webkit-input-placeholder {
-		opacity: 1;
-		transition: opacity 0.3s ease;
-	}
-
-	&::-moz-placeholder {
-		opacity: 1;
-		transition: opacity 0.3s ease;
-	}
-
-	&:-moz-placeholder {
-		opacity: 1;
-		transition: opacity 0.3s ease;
-	}
-
-	&:-ms-input-placeholder {
-		opacity: 1;
-		transition: opacity 0.3s ease;
-	}
-
-	&:focus::-webkit-input-placeholder {
-		opacity: 0;
-		transition: opacity 0.3s ease;
-	}
-
-	&:focus::-moz-placeholder {
-		opacity: 0;
-		transition: opacity 0.3s ease;
-	}
-
-	&:focus:-moz-placeholder {
-		opacity: 0;
-		transition: opacity 0.3s ease;
-	}
-
-	&:focus:-ms-input-placeholder {
-		opacity: 0;
-		transition: opacity 0.3s ease;
-	}
 `;

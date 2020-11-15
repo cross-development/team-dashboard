@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 //Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { signOutUser } from 'redux/auth/authOperations';
+//Assets
+import DefaultAvatar from 'assets/defaultAvatar.png';
 //Styles
-import UserAvatar from 'assets/user.jpg';
 import { FaChevronDown } from 'react-icons/fa';
 import { StyledMenu, StyledMenuItem, StyledMenuLink } from './UserMenu.styles';
 import { StylesContainer, StyledImg, StyledName, StyledDropdown } from './UserMenu.styles';
@@ -12,8 +13,8 @@ import { StylesContainer, StyledImg, StyledName, StyledDropdown } from './UserMe
 const UserMenu = () => {
 	const [isOpen, setIsOpen] = useState(false);
 
-	const { displayName } = useSelector(state => state.auth);
 	const dispatch = useDispatch();
+	const { displayName, photoURL } = useSelector(state => state.auth);
 
 	const handleClick = () => setIsOpen(prevState => !prevState);
 
@@ -21,7 +22,7 @@ const UserMenu = () => {
 
 	return (
 		<StylesContainer>
-			<StyledImg src={UserAvatar} />
+			<StyledImg src={photoURL || DefaultAvatar} />
 
 			<StyledName>{displayName}</StyledName>
 

@@ -59,46 +59,6 @@ export const StyledInput = styled.input`
 		font-size: 14px;
 		text-align: center;
 	}
-
-	&::-webkit-input-placeholder {
-		opacity: 1;
-		transition: opacity 0.3s ease;
-	}
-
-	&::-moz-placeholder {
-		opacity: 1;
-		transition: opacity 0.3s ease;
-	}
-
-	&:-moz-placeholder {
-		opacity: 1;
-		transition: opacity 0.3s ease;
-	}
-
-	&:-ms-input-placeholder {
-		opacity: 1;
-		transition: opacity 0.3s ease;
-	}
-
-	&:focus::-webkit-input-placeholder {
-		opacity: 0;
-		transition: opacity 0.3s ease;
-	}
-
-	&:focus::-moz-placeholder {
-		opacity: 0;
-		transition: opacity 0.3s ease;
-	}
-
-	&:focus:-moz-placeholder {
-		opacity: 0;
-		transition: opacity 0.3s ease;
-	}
-
-	&:focus:-ms-input-placeholder {
-		opacity: 0;
-		transition: opacity 0.3s ease;
-	}
 `;
 
 export const StyledButton = styled.button`
@@ -107,6 +67,7 @@ export const StyledButton = styled.button`
 	color: #fff;
 	border-radius: 100px;
 	padding: 12px 0;
+	font-size: 14px;
 	cursor: pointer;
 	transition: all 250ms linear;
 	box-shadow: 0 0 8px #507bfc;

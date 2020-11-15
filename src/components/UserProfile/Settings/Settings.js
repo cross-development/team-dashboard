@@ -7,31 +7,42 @@ import BirthdayInfo from './BirthdayInfo';
 import LocationInfo from './LocationInfo';
 import PhoneInfo from './PhoneInfo';
 //Styles
-import { StyledContainer, StyledTitle, StyledGeneralForm } from './Settings.styles';
 import { StyledAcceptWrap, StyledButton } from './Settings.styles';
+import { StyledContainer, StyledTitle, StyledSettingsContainer } from './Settings.styles';
 
-const Settings = () => {
-	return (
-		<StyledContainer>
-			<StyledTitle>Edit Your Personal Settings</StyledTitle>
+const Settings = ({ commonInfo, onChangeCommonInfo, onChangeBirthdayInfo }) => (
+	<StyledContainer>
+		<StyledTitle>Edit Your Personal Settings</StyledTitle>
 
-			<StyledGeneralForm>
-				<GeneralInfo />
+		<StyledSettingsContainer>
+			<GeneralInfo commonInfo={commonInfo} onChangeGeneralInfo={onChangeCommonInfo} />
 
-				<BirthdayInfo />
+			<BirthdayInfo commonInfo={commonInfo} onChangeBirthdayInfo={onChangeBirthdayInfo} />
 
-				<LocationInfo />
+			<LocationInfo commonInfo={commonInfo} onChangeLocationInfo={onChangeCommonInfo} />
 
-				<PhoneInfo />
+			<PhoneInfo commonInfo={commonInfo} onChangePhoneInfo={onChangeCommonInfo} />
 
-				<StyledAcceptWrap>
-					<StyledButton>Save and Update</StyledButton>
-				</StyledAcceptWrap>
-			</StyledGeneralForm>
-		</StyledContainer>
-	);
+			<StyledAcceptWrap>
+				<StyledButton>Save and Update</StyledButton>
+			</StyledAcceptWrap>
+		</StyledSettingsContainer>
+	</StyledContainer>
+);
+
+Settings.propTypes = {
+	onChangeCommonInfo: PropTypes.func.isRequired,
+	onChangeBirthdayInfo: PropTypes.func.isRequired,
+	commonInfo: PropTypes.shape({
+		name: PropTypes.string.isRequired,
+		title: PropTypes.string.isRequired,
+		email: PropTypes.string.isRequired,
+		region: PropTypes.string.isRequired,
+		country: PropTypes.string.isRequired,
+		birthday: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]).isRequired,
+		postalCode: PropTypes.string.isRequired,
+		phoneNumber: PropTypes.string.isRequired,
+	}).isRequired,
 };
-
-Settings.propTypes = {};
 
 export default Settings;

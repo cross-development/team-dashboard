@@ -9,11 +9,13 @@ import store from 'redux/store';
 //Firebase
 import './firebase';
 //Styles
-import './index.css';
+import GlobalStyles from './index.styles';
 
 ReactDOM.render(
 	<Provider store={store}>
 		<App />
+
+		<GlobalStyles />
 	</Provider>,
 	document.getElementById('root'),
 );

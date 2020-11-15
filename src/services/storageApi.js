@@ -29,8 +29,27 @@ const uploadTeammateAvatarToServer = async ({ avatar }) => {
 	return processedPhoto;
 };
 
+const uploadUserAvatarToServer = async ({ avatar }) => {
+	const uniquePostId = Date.now().toString();
+
+	await firebase.storage().ref(`usersAvatar/${uniquePostId}`).put(avatar);
+
+	const processedPhoto = await firebase
+		.storage()
+		.ref('usersAvatar')
+		.child(uniquePostId)
+		.getDownloadURL();
+
+	return processedPhoto;
+};
+
 const removeAvatarFromServer = async ({ avatarURI }) => {
 	await firebase.storage().refFromURL(avatarURI).delete();
 };
 
-export { uploadTeamAvatarToServer, uploadTeammateAvatarToServer, removeAvatarFromServer };
+export {
+	uploadTeamAvatarToServer,
+	uploadTeammateAvatarToServer,
+	uploadUserAvatarToServer,
+	removeAvatarFromServer,
+};

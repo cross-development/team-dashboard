@@ -4,14 +4,15 @@ import PropTypes from 'prop-types';
 //Styles
 import { StyledGeneralInfo, StyledLabel, StyledInput } from './GeneralInfo.styles';
 
-const GeneralInfo = () => (
+const GeneralInfo = ({ commonInfo, onChangeGeneralInfo }) => (
 	<StyledGeneralInfo>
 		<StyledLabel>
 			Full Name
 			<StyledInput
+				name="name"
 				type="text"
-				value=""
-				onChange=""
+				value={commonInfo.name}
+				onChange={onChangeGeneralInfo}
 				autoComplete="off"
 				placeholder="Enter your full name here"
 			/>
@@ -20,9 +21,10 @@ const GeneralInfo = () => (
 		<StyledLabel>
 			Title
 			<StyledInput
+				name="title"
 				type="text"
-				value=""
-				onChange=""
+				value={commonInfo.title}
+				onChange={onChangeGeneralInfo}
 				autoComplete="off"
 				placeholder="Enter your title here"
 			/>
@@ -31,9 +33,10 @@ const GeneralInfo = () => (
 		<StyledLabel>
 			Email
 			<StyledInput
+				name="email"
 				type="email"
-				value=""
-				onChange=""
+				value={commonInfo.email}
+				onChange={onChangeGeneralInfo}
 				autoComplete="off"
 				placeholder="Enter your email here"
 			/>
@@ -41,6 +44,18 @@ const GeneralInfo = () => (
 	</StyledGeneralInfo>
 );
 
-GeneralInfo.propTypes = {};
+GeneralInfo.propTypes = {
+	onChangeGeneralInfo: PropTypes.func.isRequired,
+	commonInfo: PropTypes.shape({
+		name: PropTypes.string.isRequired,
+		title: PropTypes.string.isRequired,
+		email: PropTypes.string.isRequired,
+		region: PropTypes.string.isRequired,
+		country: PropTypes.string.isRequired,
+		birthday: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]).isRequired,
+		postalCode: PropTypes.string.isRequired,
+		phoneNumber: PropTypes.string.isRequired,
+	}).isRequired,
+};
 
 export default GeneralInfo;

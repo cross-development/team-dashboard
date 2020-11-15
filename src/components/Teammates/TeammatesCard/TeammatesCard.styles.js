@@ -13,7 +13,6 @@ export const StyledCardItem = styled.li`
 	border-radius: 6px;
 	background-color: #fff;
 	transition: all 250ms linear;
-	/* box-shadow: 0px 0px 2px 0px #707070; */
 
 	&:hover {
 		box-shadow: 0px 0px 2px 0px #707070;
