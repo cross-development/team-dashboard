@@ -18,6 +18,7 @@ export const authSlice = createSlice({
 		setUserProfileSuccess: (state, { payload }) => ({
 			...state,
 			uid: payload.uid,
+			photoURL: payload.photoURL,
 			displayName: payload.displayName,
 		}),
 
@@ -26,6 +27,7 @@ export const authSlice = createSlice({
 			uid: payload.uid,
 			photoURL: payload.photoURL,
 			displayName: payload.displayName,
+			profileInfo: payload.profileInfo,
 		}),
 
 		setAuthLoadingSuccess: (state, { payload }) => ({

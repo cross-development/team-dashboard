@@ -20,9 +20,9 @@ const signUpUser = ({ name, email, password }) => async dispatch => {
 		const user = await firebase.auth().currentUser;
 		await user.updateProfile({ displayName: name });
 
-		const { uid, displayName } = await firebase.auth().currentUser;
+		const { uid, displayName, photoURL } = await firebase.auth().currentUser;
 
-		dispatch(setUserProfileSuccess({ uid, displayName }));
+		dispatch(setUserProfileSuccess({ uid, displayName, photoURL }));
 	} catch (error) {
 		dispatch(setAuthErrorSuccess(error));
 	} finally {
@@ -37,7 +37,7 @@ const signInUser = ({ email, password }) => async dispatch => {
 		await firebase.auth().signInWithEmailAndPassword(email, password);
 		const { uid, displayName, photoURL } = await firebase.auth().currentUser;
 
-		dispatch(updateProfileSuccess({ uid, displayName, photoURL }));
+		dispatch(setUserProfileSuccess({ uid, displayName, photoURL }));
 	} catch (error) {
 		dispatch(setAuthErrorSuccess(error));
 	} finally {
@@ -68,7 +68,7 @@ const authStateChange = () => async dispatch => {
 			if (currentUser) {
 				const { uid, displayName, photoURL } = currentUser;
 
-				dispatch(updateProfileSuccess({ uid, displayName, photoURL }));
+				dispatch(setUserProfileSuccess({ uid, displayName, photoURL }));
 			}
 		});
 	} catch (error) {
@@ -78,15 +78,41 @@ const authStateChange = () => async dispatch => {
 	}
 };
 
-const updateUserProfile = ({ avatar }) => async dispatch => {
+const updateUserProfile = ({ avatar, commonInfo, socialLinks }) => async dispatch => {
+	const { name, title, email, birthday, country, region, postalCode, phoneNumber } = commonInfo;
+
 	dispatch(setAuthLoadingSuccess(true));
 	try {
 		const user = await firebase.auth().currentUser;
-		await user.updateProfile({ photoURL: avatar });
+
+		if (name && avatar) {
+			await user.updateProfile({ displayName: name, photoURL: avatar });
+		}
 
 		const { uid, displayName, photoURL } = await firebase.auth().currentUser;
 
-		dispatch(updateProfileSuccess({ uid, displayName, photoURL }));
+		const updatedInfo = {
+			title,
+			country,
+			region,
+			postalCode,
+			phoneNumber,
+			additionalEmail: email,
+			birthday: birthday.toLocaleDateString(),
+		};
+
+		const users = firebase.database().ref('users/' + uid);
+		users.update({ ...updatedInfo, ...socialLinks, photoURL });
+
+		dispatch(
+			updateProfileSuccess({
+				uid,
+				displayName,
+				photoURL,
+				profileInfo: { ...updatedInfo, ...socialLinks },
+			}),
+		);
+		dispatch(setUserProfileSuccess({ uid, displayName, photoURL }));
 	} catch (error) {
 		dispatch(setAuthErrorSuccess(error));
 	} finally {

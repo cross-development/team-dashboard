@@ -1,11 +1,13 @@
 //Core
 import React, { useState, useMemo, useRef, useCallback, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 //Components
 import Profile from 'components/UserProfile/Profile';
 import Settings from 'components/UserProfile/Settings';
 import Social from 'components/UserProfile/Social';
 //Redux
 import { useSelector, useDispatch } from 'react-redux';
+import { updateUserProfile } from 'redux/auth/authOperations';
 //Services
 import { uploadUserAvatarToServer } from 'services/storageApi';
 //Styles
@@ -33,12 +35,13 @@ const socialLinksInitState = {
 };
 
 const ProfilePage = () => {
+	const history = useHistory();
+	const dispatch = useDispatch();
+
 	//Avatar info state (for Profile component)
 	const avatarRef = useRef(null);
 
-	const dispatch = useDispatch();
 	const { photoURL } = useSelector(state => state.auth);
-
 	const [avatar, setAvatar] = useState('null');
 
 	const memoAvatarCallback = useCallback(() => setAvatar(photoURL), [photoURL]);
@@ -64,8 +67,8 @@ const ProfilePage = () => {
 	const handleSubmit = async e => {
 		e.preventDefault();
 
-		const uploadedAvatar = avatarRef.current.files[0];
-		const avatarURI = uploadedAvatar ? await uploadUserAvatarToServer({ avatar }) : '';
+		const avatar = avatarRef.current.files[0];
+		const avatarURI = avatar ? await uploadUserAvatarToServer({ avatar }) : photoURL;
 
 		const profileInformation = {
 			avatar: avatarURI,
@@ -73,7 +76,8 @@ const ProfilePage = () => {
 			socialLinks: { ...socialLinks },
 		};
 
-		console.log(profileInformation);
+		dispatch(updateUserProfile({ ...profileInformation }));
+		history.replace('/all-teams');
 	};
 
 	const MemoProfile = useMemo(() => <Profile avatar={avatar} avatarRef={avatarRef} />, [
