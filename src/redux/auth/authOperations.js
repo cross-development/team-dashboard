@@ -68,7 +68,13 @@ const authStateChange = () => async dispatch => {
 			if (currentUser) {
 				const { uid, displayName, photoURL } = currentUser;
 
-				dispatch(setUserProfileSuccess({ uid, displayName, photoURL }));
+				const profileInfo = firebase.database().ref('users/' + uid);
+
+				profileInfo.on('value', snapshot => {
+					dispatch(
+						updateProfileSuccess({ uid, displayName, photoURL, profileInfo: snapshot.val() }),
+					);
+				});
 			}
 		});
 	} catch (error) {
