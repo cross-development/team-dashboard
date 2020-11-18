@@ -11,9 +11,9 @@ const GeneralInfo = ({ commonInfo, onChangeGeneralInfo }) => (
 			<StyledInput
 				name="name"
 				type="text"
-				value={commonInfo.name}
-				onChange={onChangeGeneralInfo}
 				autoComplete="off"
+				onChange={onChangeGeneralInfo}
+				value={commonInfo?.name || ''}
 				placeholder="Enter your full name here"
 			/>
 		</StyledLabel>
@@ -23,9 +23,9 @@ const GeneralInfo = ({ commonInfo, onChangeGeneralInfo }) => (
 			<StyledInput
 				name="title"
 				type="text"
-				value={commonInfo.title}
-				onChange={onChangeGeneralInfo}
 				autoComplete="off"
+				onChange={onChangeGeneralInfo}
+				value={commonInfo?.title || ''}
 				placeholder="Enter your title here"
 			/>
 		</StyledLabel>
@@ -35,9 +35,9 @@ const GeneralInfo = ({ commonInfo, onChangeGeneralInfo }) => (
 			<StyledInput
 				name="email"
 				type="email"
-				value={commonInfo.email}
-				onChange={onChangeGeneralInfo}
 				autoComplete="off"
+				onChange={onChangeGeneralInfo}
+				value={commonInfo?.email || ''}
 				placeholder="Enter your email here"
 			/>
 		</StyledLabel>
@@ -52,7 +52,7 @@ GeneralInfo.propTypes = {
 		email: PropTypes.string.isRequired,
 		region: PropTypes.string.isRequired,
 		country: PropTypes.string.isRequired,
-		birthday: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]).isRequired,
+		birthday: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(Date)]).isRequired,
 		postalCode: PropTypes.string.isRequired,
 		phoneNumber: PropTypes.string.isRequired,
 	}).isRequired,

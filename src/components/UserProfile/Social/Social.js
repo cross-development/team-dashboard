@@ -19,7 +19,7 @@ const Social = ({ onChangeSocialLinks, socialLinks }) => (
 						type="text"
 						name={name}
 						autoComplete="off"
-						value={socialLinks[name]}
+						value={socialLinks[name] || ''}
 						onChange={onChangeSocialLinks}
 						placeholder="Paste your link here"
 					/>

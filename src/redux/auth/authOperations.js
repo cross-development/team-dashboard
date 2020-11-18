@@ -85,37 +85,31 @@ const authStateChange = () => async dispatch => {
 };
 
 const updateUserProfile = ({ avatar, commonInfo, socialLinks }) => async dispatch => {
-	const { name, title, email, birthday, country, region, postalCode, phoneNumber } = commonInfo;
-
 	dispatch(setAuthLoadingSuccess(true));
+
 	try {
 		const user = await firebase.auth().currentUser;
 
-		if (name && avatar) {
-			await user.updateProfile({ displayName: name, photoURL: avatar });
+		if (commonInfo.name && avatar) {
+			await user.updateProfile({ displayName: commonInfo.name, photoURL: avatar });
 		}
 
 		const { uid, displayName, photoURL } = await firebase.auth().currentUser;
 
-		const updatedInfo = {
-			title,
-			country,
-			region,
-			postalCode,
-			phoneNumber,
-			additionalEmail: email,
-			birthday: birthday.toLocaleDateString(),
+		const userInfo = {
+			...commonInfo,
+			birthday: Date.parse(commonInfo.birthday),
 		};
 
 		const users = firebase.database().ref('users/' + uid);
-		users.update({ ...updatedInfo, ...socialLinks, photoURL });
+		users.update({ userInfo, socialLinks, photoURL });
 
 		dispatch(
 			updateProfileSuccess({
 				uid,
-				displayName,
 				photoURL,
-				profileInfo: { ...updatedInfo, ...socialLinks },
+				displayName,
+				profileInfo: { userInfo, socialLinks },
 			}),
 		);
 		dispatch(setUserProfileSuccess({ uid, displayName, photoURL }));

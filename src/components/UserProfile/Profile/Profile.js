@@ -9,7 +9,7 @@ import { StyledSloganWrap, StyledSloganTitle, StyledSlogan } from './Profile.sty
 import { StyledContainer, StyledProfileWrap, StyledAvatarWrap } from './Profile.styles';
 import { StyledName, StyledAvatar, StyledTitle, StyledFileInput } from './Profile.styles';
 
-const Profile = ({ avatar, avatarRef }) => {
+const Profile = ({ avatar, avatarRef, userName }) => {
 	const [isAccepted, setIsAccepted] = useState(false);
 
 	const setInputAccept = e => {
@@ -29,7 +29,7 @@ const Profile = ({ avatar, avatarRef }) => {
 					<StyledAvatar src={avatar || DefaultAvatar} />
 				</StyledAvatarWrap>
 
-				<StyledName>John Doe</StyledName>
+				<StyledName>{userName}</StyledName>
 
 				<StyledFileLabel>
 					Upload New Avatar
@@ -55,6 +55,10 @@ const Profile = ({ avatar, avatarRef }) => {
 	);
 };
 
-Profile.propTypes = {};
+Profile.propTypes = {
+	avatar: PropTypes.string.isRequired,
+	avatarRef: PropTypes.objectOf(PropTypes.any).isRequired,
+	userName: PropTypes.string.isRequired,
+};
 
 export default Profile;

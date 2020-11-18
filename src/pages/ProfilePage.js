@@ -38,18 +38,11 @@ const ProfilePage = () => {
 	const history = useHistory();
 	const dispatch = useDispatch();
 
-	//Avatar info state (for Profile component)
 	const avatarRef = useRef(null);
+	const { profileInfo, photoURL, displayName } = useSelector(state => state.auth);
 
-	const { photoURL } = useSelector(state => state.auth);
-	const [avatar, setAvatar] = useState('null');
-
-	const memoAvatarCallback = useCallback(() => setAvatar(photoURL), [photoURL]);
-
-	useEffect(() => memoAvatarCallback(), [memoAvatarCallback]);
-
-	//Common info state (for Settings component)
-	const [commonInfo, setCommonInfo] = useState(commonInfoInitState);
+	//Common info portion (for Settings component)
+	const [commonInfo, setCommonInfo] = useState(profileInfo?.userInfo || commonInfoInitState);
 
 	const handleChangeCommonInfo = ({ target: { name, value } }) =>
 		setCommonInfo(prevState => ({ ...prevState, [name]: value }));
@@ -57,8 +50,8 @@ const ProfilePage = () => {
 	const handleChangeBirthdayInfo = value =>
 		setCommonInfo(prevState => ({ ...prevState, birthday: value }));
 
-	//Social links state (for Social component)
-	const [socialLinks, setSocialLinks] = useState(socialLinksInitState);
+	//Social links portion (for Social component)
+	const [socialLinks, setSocialLinks] = useState(profileInfo?.socialLinks || socialLinksInitState);
 
 	const handleChangeSocialLinks = ({ target: { name, value } }) =>
 		setSocialLinks(prevState => ({ ...prevState, [name]: value }));
@@ -72,18 +65,18 @@ const ProfilePage = () => {
 
 		const profileInformation = {
 			avatar: avatarURI,
-			commonInfo: { ...commonInfo },
-			socialLinks: { ...socialLinks },
+			commonInfo,
+			socialLinks,
 		};
 
 		dispatch(updateUserProfile({ ...profileInformation }));
 		history.replace('/all-teams');
 	};
 
-	const MemoProfile = useMemo(() => <Profile avatar={avatar} avatarRef={avatarRef} />, [
-		avatar,
-		avatarRef,
-	]);
+	const MemoProfile = useMemo(
+		() => <Profile avatar={photoURL} userName={displayName} avatarRef={avatarRef} />,
+		[displayName, photoURL, avatarRef],
+	);
 
 	const MemoSettings = useMemo(
 		() => (
@@ -138,3 +131,7 @@ const StyledProfileForm = styled.form`
 `;
 
 export default ProfilePage;
+
+// const [avatar, setAvatar] = useState(photoURL);
+// const memoAvatarCallback = useCallback(() => setAvatar(photoURL), [photoURL]);
+// useEffect(() => memoAvatarCallback(), [memoAvatarCallback]);

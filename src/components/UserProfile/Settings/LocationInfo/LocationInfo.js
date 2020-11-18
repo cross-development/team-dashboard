@@ -27,7 +27,7 @@ const LocationInfo = ({ commonInfo, onChangeLocationInfo }) => (
 				name="region"
 				autoComplete="off"
 				placeholder="Type here"
-				value={commonInfo.region}
+				value={commonInfo?.region || ''}
 				onChange={onChangeLocationInfo}
 			/>
 		</StyledLabel>
@@ -42,7 +42,7 @@ LocationInfo.propTypes = {
 		email: PropTypes.string.isRequired,
 		region: PropTypes.string.isRequired,
 		country: PropTypes.string.isRequired,
-		birthday: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]).isRequired,
+		birthday: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(Date)]).isRequired,
 		postalCode: PropTypes.string.isRequired,
 		phoneNumber: PropTypes.string.isRequired,
 	}).isRequired,

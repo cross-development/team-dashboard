@@ -13,7 +13,7 @@ const PhoneInfo = ({ commonInfo, onChangePhoneInfo }) => (
 				name="postalCode"
 				autoComplete="off"
 				placeholder="Type here"
-				value={commonInfo.postalCode}
+				value={commonInfo?.postalCode || ''}
 				onChange={onChangePhoneInfo}
 			/>
 		</StyledLabel>
@@ -25,7 +25,7 @@ const PhoneInfo = ({ commonInfo, onChangePhoneInfo }) => (
 				name="phoneNumber"
 				autoComplete="off"
 				placeholder="Type here"
-				value={commonInfo.phoneNumber}
+				value={commonInfo?.phoneNumber || ''}
 				onChange={onChangePhoneInfo}
 			/>
 		</StyledLabel>
@@ -40,7 +40,7 @@ PhoneInfo.propTypes = {
 		email: PropTypes.string.isRequired,
 		region: PropTypes.string.isRequired,
 		country: PropTypes.string.isRequired,
-		birthday: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]).isRequired,
+		birthday: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(Date)]).isRequired,
 		postalCode: PropTypes.string.isRequired,
 		phoneNumber: PropTypes.string.isRequired,
 	}).isRequired,
