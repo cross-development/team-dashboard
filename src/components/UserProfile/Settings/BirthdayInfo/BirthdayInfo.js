@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 //Styles
 import { StyledBirthdayInfo, StyledLabel, StyledDatepicker } from './BirthdayInfo.styles';
 
-const BirthdayInfo = ({ commonInfo, onChangeBirthdayInfo }) => (
+const BirthdayInfo = ({ birthdayInfo, onChangeBirthdayInfo }) => (
 	<StyledBirthdayInfo>
 		<StyledLabel>
 			Birthday
@@ -12,7 +12,7 @@ const BirthdayInfo = ({ commonInfo, onChangeBirthdayInfo }) => (
 				name="birthday"
 				format="dd/MM/y"
 				clearIcon={null}
-				value={new Date(commonInfo?.birthday) || ''}
+				value={birthdayInfo}
 				onChange={onChangeBirthdayInfo}
 			/>
 		</StyledLabel>
@@ -21,16 +21,7 @@ const BirthdayInfo = ({ commonInfo, onChangeBirthdayInfo }) => (
 
 BirthdayInfo.propTypes = {
 	onChangeBirthdayInfo: PropTypes.func.isRequired,
-	commonInfo: PropTypes.shape({
-		name: PropTypes.string.isRequired,
-		title: PropTypes.string.isRequired,
-		email: PropTypes.string.isRequired,
-		region: PropTypes.string.isRequired,
-		country: PropTypes.string.isRequired,
-		birthday: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(Date)]).isRequired,
-		postalCode: PropTypes.string.isRequired,
-		phoneNumber: PropTypes.string.isRequired,
-	}).isRequired,
+	birthdayInfo: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]).isRequired,
 };
 
 export default BirthdayInfo;

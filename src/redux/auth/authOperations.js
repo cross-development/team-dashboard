@@ -11,6 +11,26 @@ const {
 	setAuthLoadingSuccess,
 } = authSlice.actions;
 
+const commonInfoInitState = {
+	gender: '',
+	email: '',
+	birthday: '',
+	country: '',
+	region: '',
+	postalCode: '',
+	phoneNumber: '',
+};
+
+const socialLinksInitState = {
+	facebook: '',
+	twitter: '',
+	reddit: '',
+	instagram: '',
+	linkedIn: '',
+	gitHub: '',
+	website: '',
+};
+
 const signUpUser = ({ name, email, password }) => async dispatch => {
 	dispatch(setAuthLoadingSuccess(true));
 
@@ -21,6 +41,10 @@ const signUpUser = ({ name, email, password }) => async dispatch => {
 		await user.updateProfile({ displayName: name });
 
 		const { uid, displayName, photoURL } = await firebase.auth().currentUser;
+
+		const profileInfo = await firebase.database().ref('users/' + uid);
+		await profileInfo.child('userInfo').set({ name: displayName, ...commonInfoInitState });
+		await profileInfo.child('socialLinks').set({ ...socialLinksInitState });
 
 		dispatch(setUserProfileSuccess({ uid, displayName, photoURL }));
 	} catch (error) {
@@ -98,7 +122,7 @@ const updateUserProfile = ({ avatar, commonInfo, socialLinks }) => async dispatc
 
 		const userInfo = {
 			...commonInfo,
-			birthday: Date.parse(commonInfo.birthday),
+			birthday: commonInfo.birthday.toString(),
 		};
 
 		const users = firebase.database().ref('users/' + uid);

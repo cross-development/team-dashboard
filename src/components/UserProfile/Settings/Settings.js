@@ -10,36 +10,44 @@ import PhoneInfo from './PhoneInfo';
 import { StyledAcceptWrap, StyledButton } from './Settings.styles';
 import { StyledContainer, StyledTitle, StyledSettingsContainer } from './Settings.styles';
 
-const Settings = ({ commonInfo, onChangeCommonInfo, onChangeBirthdayInfo }) => (
-	<StyledContainer>
-		<StyledTitle>Edit Your Personal Settings</StyledTitle>
+const Settings = ({ commonInfo, onChangeCommonInfo, onChangeBirthdayInfo }) => {
+	const { birthday, email, gender, name, country, region, phoneNumber, postalCode } = commonInfo;
 
-		<StyledSettingsContainer>
-			<GeneralInfo commonInfo={commonInfo} onChangeGeneralInfo={onChangeCommonInfo} />
+	const generalInfo = { email, gender, name };
+	const locationInfo = { country, region };
+	const phoneInfo = { phoneNumber, postalCode };
 
-			<BirthdayInfo commonInfo={commonInfo} onChangeBirthdayInfo={onChangeBirthdayInfo} />
+	return (
+		<StyledContainer>
+			<StyledTitle>Edit Your Personal Settings</StyledTitle>
 
-			<LocationInfo commonInfo={commonInfo} onChangeLocationInfo={onChangeCommonInfo} />
+			<StyledSettingsContainer>
+				<GeneralInfo generalInfo={generalInfo} onChangeGeneralInfo={onChangeCommonInfo} />
 
-			<PhoneInfo commonInfo={commonInfo} onChangePhoneInfo={onChangeCommonInfo} />
+				<BirthdayInfo birthdayInfo={birthday} onChangeBirthdayInfo={onChangeBirthdayInfo} />
 
-			<StyledAcceptWrap>
-				<StyledButton>Save and Update</StyledButton>
-			</StyledAcceptWrap>
-		</StyledSettingsContainer>
-	</StyledContainer>
-);
+				<LocationInfo locationInfo={locationInfo} onChangeLocationInfo={onChangeCommonInfo} />
+
+				<PhoneInfo phoneInfo={phoneInfo} onChangePhoneInfo={onChangeCommonInfo} />
+
+				<StyledAcceptWrap>
+					<StyledButton>Save and Update</StyledButton>
+				</StyledAcceptWrap>
+			</StyledSettingsContainer>
+		</StyledContainer>
+	);
+};
 
 Settings.propTypes = {
 	onChangeCommonInfo: PropTypes.func.isRequired,
 	onChangeBirthdayInfo: PropTypes.func.isRequired,
 	commonInfo: PropTypes.shape({
 		name: PropTypes.string.isRequired,
-		title: PropTypes.string.isRequired,
+		gender: PropTypes.string.isRequired,
 		email: PropTypes.string.isRequired,
 		region: PropTypes.string.isRequired,
 		country: PropTypes.string.isRequired,
-		birthday: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(Date)]).isRequired,
+		birthday: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]).isRequired,
 		postalCode: PropTypes.string.isRequired,
 		phoneNumber: PropTypes.string.isRequired,
 	}).isRequired,

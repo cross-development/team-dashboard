@@ -1,5 +1,5 @@
 //Core
-import React, { useState, useMemo, useRef, useCallback, useEffect } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 //Components
 import Profile from 'components/UserProfile/Profile';
@@ -10,29 +10,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateUserProfile } from 'redux/auth/authOperations';
 //Services
 import { uploadUserAvatarToServer } from 'services/storageApi';
+//Assets
+import DefaultAvatar from 'assets/defaultAvatar.png';
 //Styles
 import styled from 'styled-components';
-
-const commonInfoInitState = {
-	name: '',
-	title: '',
-	email: '',
-	birthday: '',
-	country: '',
-	region: '',
-	postalCode: '',
-	phoneNumber: '',
-};
-
-const socialLinksInitState = {
-	facebook: '',
-	twitter: '',
-	reddit: '',
-	instagram: '',
-	linkedIn: '',
-	gitHub: '',
-	website: '',
-};
 
 const ProfilePage = () => {
 	const history = useHistory();
@@ -42,7 +23,7 @@ const ProfilePage = () => {
 	const { profileInfo, photoURL, displayName } = useSelector(state => state.auth);
 
 	//Common info portion (for Settings component)
-	const [commonInfo, setCommonInfo] = useState(profileInfo?.userInfo || commonInfoInitState);
+	const [commonInfo, setCommonInfo] = useState(profileInfo?.userInfo);
 
 	const handleChangeCommonInfo = ({ target: { name, value } }) =>
 		setCommonInfo(prevState => ({ ...prevState, [name]: value }));
@@ -51,7 +32,7 @@ const ProfilePage = () => {
 		setCommonInfo(prevState => ({ ...prevState, birthday: value }));
 
 	//Social links portion (for Social component)
-	const [socialLinks, setSocialLinks] = useState(profileInfo?.socialLinks || socialLinksInitState);
+	const [socialLinks, setSocialLinks] = useState(profileInfo?.socialLinks);
 
 	const handleChangeSocialLinks = ({ target: { name, value } }) =>
 		setSocialLinks(prevState => ({ ...prevState, [name]: value }));
@@ -74,7 +55,9 @@ const ProfilePage = () => {
 	};
 
 	const MemoProfile = useMemo(
-		() => <Profile avatar={photoURL} userName={displayName} avatarRef={avatarRef} />,
+		() => (
+			<Profile avatar={photoURL || DefaultAvatar} userName={displayName} avatarRef={avatarRef} />
+		),
 		[displayName, photoURL, avatarRef],
 	);
 

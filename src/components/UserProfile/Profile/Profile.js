@@ -1,8 +1,6 @@
 //Core
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-//Assets
-import DefaultAvatar from 'assets/defaultAvatar.png';
 //Styles
 import { StyledIconQuote, StyledFileLabel } from './Profile.styles';
 import { StyledSloganWrap, StyledSloganTitle, StyledSlogan } from './Profile.styles';
@@ -26,7 +24,7 @@ const Profile = ({ avatar, avatarRef, userName }) => {
 
 			<StyledProfileWrap>
 				<StyledAvatarWrap isAccepted={isAccepted}>
-					<StyledAvatar src={avatar || DefaultAvatar} />
+					<StyledAvatar src={avatar} />
 				</StyledAvatarWrap>
 
 				<StyledName>{userName}</StyledName>

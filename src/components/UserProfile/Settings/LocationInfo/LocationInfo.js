@@ -7,11 +7,11 @@ import { StyledSelect } from './LocationInfo.styles';
 //Data
 import countries from 'data/countries.json';
 
-const LocationInfo = ({ commonInfo, onChangeLocationInfo }) => (
+const LocationInfo = ({ locationInfo, onChangeLocationInfo }) => (
 	<StyledLocationInfo>
 		<StyledLabel>
 			Country
-			<StyledSelect name="country" value={commonInfo.country} onChange={onChangeLocationInfo}>
+			<StyledSelect name="country" value={locationInfo.country} onChange={onChangeLocationInfo}>
 				{countries.map(({ name }) => (
 					<option key={name} value={name}>
 						{name}
@@ -27,7 +27,7 @@ const LocationInfo = ({ commonInfo, onChangeLocationInfo }) => (
 				name="region"
 				autoComplete="off"
 				placeholder="Type here"
-				value={commonInfo?.region || ''}
+				value={locationInfo.region}
 				onChange={onChangeLocationInfo}
 			/>
 		</StyledLabel>
@@ -36,15 +36,9 @@ const LocationInfo = ({ commonInfo, onChangeLocationInfo }) => (
 
 LocationInfo.propTypes = {
 	onChangeLocationInfo: PropTypes.func.isRequired,
-	commonInfo: PropTypes.shape({
-		name: PropTypes.string.isRequired,
-		title: PropTypes.string.isRequired,
-		email: PropTypes.string.isRequired,
+	locationInfo: PropTypes.shape({
 		region: PropTypes.string.isRequired,
 		country: PropTypes.string.isRequired,
-		birthday: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(Date)]).isRequired,
-		postalCode: PropTypes.string.isRequired,
-		phoneNumber: PropTypes.string.isRequired,
 	}).isRequired,
 };
 

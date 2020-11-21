@@ -31,3 +31,14 @@ export const StyledInput = styled.input`
 	box-shadow: 0px 0px 2px 0px #707070;
 	outline: none;
 `;
+
+export const StyledRadioWrap = styled.div`
+	width: 70%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+	box-shadow: 0px 0px 2px 0px #707070;
+	padding: 0.3rem 0.8rem;
+	border-radius: 50px;
+`;

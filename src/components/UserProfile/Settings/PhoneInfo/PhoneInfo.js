@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 //Styles
 import { StyledPhoneInfo, StyledLabel, StyledInput } from './PhoneInfo.styles';
 
-const PhoneInfo = ({ commonInfo, onChangePhoneInfo }) => (
+const PhoneInfo = ({ phoneInfo, onChangePhoneInfo }) => (
 	<StyledPhoneInfo>
 		<StyledLabel>
 			Postal Code
@@ -13,7 +13,7 @@ const PhoneInfo = ({ commonInfo, onChangePhoneInfo }) => (
 				name="postalCode"
 				autoComplete="off"
 				placeholder="Type here"
-				value={commonInfo?.postalCode || ''}
+				value={phoneInfo.postalCode}
 				onChange={onChangePhoneInfo}
 			/>
 		</StyledLabel>
@@ -25,7 +25,7 @@ const PhoneInfo = ({ commonInfo, onChangePhoneInfo }) => (
 				name="phoneNumber"
 				autoComplete="off"
 				placeholder="Type here"
-				value={commonInfo?.phoneNumber || ''}
+				value={phoneInfo.phoneNumber}
 				onChange={onChangePhoneInfo}
 			/>
 		</StyledLabel>
@@ -34,13 +34,7 @@ const PhoneInfo = ({ commonInfo, onChangePhoneInfo }) => (
 
 PhoneInfo.propTypes = {
 	onChangePhoneInfo: PropTypes.func.isRequired,
-	commonInfo: PropTypes.shape({
-		name: PropTypes.string.isRequired,
-		title: PropTypes.string.isRequired,
-		email: PropTypes.string.isRequired,
-		region: PropTypes.string.isRequired,
-		country: PropTypes.string.isRequired,
-		birthday: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(Date)]).isRequired,
+	phoneInfo: PropTypes.shape({
 		postalCode: PropTypes.string.isRequired,
 		phoneNumber: PropTypes.string.isRequired,
 	}).isRequired,
