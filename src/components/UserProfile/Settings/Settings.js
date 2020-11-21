@@ -17,6 +17,8 @@ const Settings = ({ commonInfo, onChangeCommonInfo, onChangeBirthdayInfo }) => {
 	const locationInfo = { country, region };
 	const phoneInfo = { phoneNumber, postalCode };
 
+	const userBirthday = birthday ? new Date(birthday) : '';
+
 	return (
 		<StyledContainer>
 			<StyledTitle>Edit Your Personal Settings</StyledTitle>
@@ -24,7 +26,7 @@ const Settings = ({ commonInfo, onChangeCommonInfo, onChangeBirthdayInfo }) => {
 			<StyledSettingsContainer>
 				<GeneralInfo generalInfo={generalInfo} onChangeGeneralInfo={onChangeCommonInfo} />
 
-				<BirthdayInfo birthdayInfo={birthday} onChangeBirthdayInfo={onChangeBirthdayInfo} />
+				<BirthdayInfo birthdayInfo={userBirthday} onChangeBirthdayInfo={onChangeBirthdayInfo} />
 
 				<LocationInfo locationInfo={locationInfo} onChangeLocationInfo={onChangeCommonInfo} />
 
