@@ -1,5 +1,6 @@
 //Core
 import styled from 'styled-components';
+import { FaUserFriends } from 'react-icons/fa';
 
 export const StyledTitle = styled.h1`
 	font-size: 16px;
@@ -74,6 +75,9 @@ export const StyledButton = styled.button`
 	outline: none;
 	width: 70%;
 	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
 	&:hover {
 		box-shadow: 0px 10px 20px 0px rgba(80, 123, 252, 0.8);
@@ -95,4 +99,9 @@ export const StyledFileLabel = styled.label`
 	/* overflow: hidden; */
 	border-radius: 50px;
 	margin-bottom: 1rem;
+`;
+
+export const StyledAddTeamIcon = styled(FaUserFriends)`
+	margin-right: 0.4rem;
+	height: 100%;
 `;

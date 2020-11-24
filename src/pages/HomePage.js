@@ -2,6 +2,7 @@
 import React from 'react';
 //Components
 import Home from 'components/Home';
+import Main from 'components/Main';
 import { Loader } from 'components/Commons';
 //Redux
 import { useSelector } from 'react-redux';
@@ -11,11 +12,19 @@ const HomePage = () => {
 
 	return (
 		<>
-			{uid && <Loader onLoad={loading} />}
+			{!uid && loading && <Loader onLoad={true} />}
 
-			{!uid && loading && <Home />}
+			{!uid && <Home />}
+
+			{uid && <Main />}
 		</>
 	);
 };
 
 export default HomePage;
+
+// {!uid && loading && <Loader onLoad={true} />}
+
+// {!uid && <Home />}
+
+// {uid && <Main />}

@@ -24,7 +24,7 @@ export const StyledSearchBar = styled.div`
 export const StyledBtn = styled.button`
 	display: inline-block;
 	width: 48px;
-	height: 38px;
+	height: 34px;
 	border: 0;
 	opacity: 0.4;
 	transition: opacity 250ms linear;
@@ -51,7 +51,7 @@ export const StyledLabel = styled.label`
 export const StyledInput = styled.input`
 	display: inline-block;
 	width: 100%;
-	height: 38px;
+	height: 34px;
 	font: inherit;
 	font-size: 14px;
 	border: none;

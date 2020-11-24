@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 //Styles
 import { FaUsers } from 'react-icons/fa';
+import { StyledAddTeamIcon } from './TeamsForm.styles';
 import { StyledTitle, StylesForm, StyledImgWrap, StyledFileInput } from './TeamsForm.styles';
 import { StyledLabel, StyledInput, StyledButton, StyledFileLabel } from './TeamsForm.styles';
 
@@ -58,7 +59,10 @@ const TeamsForm = ({ name, avatarRef, email, onSubmit, onChange }) => {
 				/>
 			</StyledLabel>
 
-			<StyledButton type="submit">Add</StyledButton>
+			<StyledButton type="submit">
+				<StyledAddTeamIcon />
+				Add
+			</StyledButton>
 		</StylesForm>
 	);
 };

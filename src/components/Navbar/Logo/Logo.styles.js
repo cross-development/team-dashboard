@@ -7,7 +7,8 @@ export const LogoWrapper = styled.div`
 `;
 
 export const StyledLink = styled(Link)`
-	font-size: 28px;
+	font-size: 34px;
+	line-height: 38.4px;
 	font-weight: 400;
 	text-decoration: none;
 	color: #5b6378;

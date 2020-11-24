@@ -11,8 +11,8 @@ export const StylesContainer = styled.div`
 `;
 
 export const StyledImg = styled.img`
-	width: 40px;
-	height: 40px;
+	width: 38px;
+	height: 38px;
 	display: block;
 	border-radius: 50px;
 `;

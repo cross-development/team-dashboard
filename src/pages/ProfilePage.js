@@ -22,7 +22,6 @@ const ProfilePage = () => {
 	const avatarRef = useRef(null);
 	const { profileInfo, photoURL, displayName } = useSelector(state => state.auth);
 
-	//Common info portion (for Settings component)
 	const [commonInfo, setCommonInfo] = useState(profileInfo?.userInfo);
 
 	const handleChangeCommonInfo = ({ target: { name, value } }) =>
@@ -31,13 +30,11 @@ const ProfilePage = () => {
 	const handleChangeBirthdayInfo = value =>
 		setCommonInfo(prevState => ({ ...prevState, birthday: value }));
 
-	//Social links portion (for Social component)
 	const [socialLinks, setSocialLinks] = useState(profileInfo?.socialLinks);
 
 	const handleChangeSocialLinks = ({ target: { name, value } }) =>
 		setSocialLinks(prevState => ({ ...prevState, [name]: value }));
 
-	//Submit method: dispatches all info to the firebase
 	const handleSubmit = async e => {
 		e.preventDefault();
 
@@ -114,7 +111,3 @@ const StyledProfileForm = styled.form`
 `;
 
 export default ProfilePage;
-
-// const [avatar, setAvatar] = useState(photoURL);
-// const memoAvatarCallback = useCallback(() => setAvatar(photoURL), [photoURL]);
-// useEffect(() => memoAvatarCallback(), [memoAvatarCallback]);

@@ -17,7 +17,7 @@ import PublicRoute from 'router/PublicRoute';
 import PrivateRoute from 'router/PrivateRoute';
 
 const App = () => {
-	const { uid, loading } = useSelector(state => state.auth);
+	const { uid } = useSelector(state => state.auth);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -35,7 +35,7 @@ const App = () => {
 			<Layout>
 				{uid && <TeamsNavigate />}
 
-				<Suspense fallback={<Loader onLoad={loading} />}>
+				<Suspense fallback={<Loader onLoad={true} />}>
 					<Switch>
 						{routes.map(route =>
 							route.private ? (
