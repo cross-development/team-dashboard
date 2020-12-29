@@ -12,9 +12,9 @@ import { removeAvatarFromServer } from 'services/storageApi';
 //Styles
 import styled from 'styled-components';
 
-const Teams = ({ name, email, avatarRef, teams, path, onSubmit, onChange }) => {
+const Teams = ({ name, email, avatarRef, teams = [], path, onSubmit, onChange }) => {
 	const { uid: userId } = useSelector(state => state.auth);
-	const { teams: teamsList } = useSelector(state => state.teams);
+	const { teams: teamsList = [] } = useSelector(state => state.teams);
 	const dispatch = useDispatch();
 
 	const removeTeamCard = ({ target: { id: teamId } }) => {

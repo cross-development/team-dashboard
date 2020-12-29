@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 //Styles
 import { StyledPhoneInfo, StyledLabel, StyledInput } from './PhoneInfo.styles';
 
-const PhoneInfo = ({ phoneInfo, onChangePhoneInfo }) => (
+const PhoneInfo = ({ phoneInfo = {}, onChangePhoneInfo }) => (
 	<StyledPhoneInfo>
 		<StyledLabel>
 			Postal Code

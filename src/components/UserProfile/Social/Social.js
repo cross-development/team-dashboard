@@ -7,30 +7,27 @@ import { StyledTitle, StyledLabel, StyledInput } from './Social.styles';
 //Data
 import socialLinksList from 'data/socialLinks.json';
 
-const Social = ({ onChangeSocialLinks, socialLinks }) => {
-	// console.log('socialLinks', socialLinks);
-	return (
-		<StyledContainer>
-			<StyledTitle>Your External Link</StyledTitle>
+const Social = ({ onChangeSocialLinks, socialLinks = [] }) => (
+	<StyledContainer>
+		<StyledTitle>Your External Link</StyledTitle>
 
-			<StyledSocialLinksWrap>
-				{socialLinksList.map(({ title, name }) => (
-					<StyledLabel key={name}>
-						{title}
-						<StyledInput
-							type="text"
-							name={name}
-							autoComplete="off"
-							value={socialLinks[name] || ''}
-							onChange={onChangeSocialLinks}
-							placeholder="Paste your link here"
-						/>
-					</StyledLabel>
-				))}
-			</StyledSocialLinksWrap>
-		</StyledContainer>
-	);
-};
+		<StyledSocialLinksWrap>
+			{socialLinksList.map(({ title, name }) => (
+				<StyledLabel key={name}>
+					{title}
+					<StyledInput
+						type="text"
+						name={name}
+						autoComplete="off"
+						value={socialLinks[name] || ''}
+						onChange={onChangeSocialLinks}
+						placeholder="Paste your link here"
+					/>
+				</StyledLabel>
+			))}
+		</StyledSocialLinksWrap>
+	</StyledContainer>
+);
 
 Social.propTypes = {
 	onChangeSocialLinks: PropTypes.func.isRequired,

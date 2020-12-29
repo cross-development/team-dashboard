@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 //Styles
 import { StyledGeneralInfo, StyledLabel, StyledInput, StyledRadioWrap } from './GeneralInfo.styles';
 
-const GeneralInfo = ({ generalInfo, onChangeGeneralInfo }) => {
+const GeneralInfo = ({ generalInfo = {}, onChangeGeneralInfo }) => {
 	const { name, gender, email } = generalInfo;
 
 	return (

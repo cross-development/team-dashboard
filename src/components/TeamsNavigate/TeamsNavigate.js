@@ -11,7 +11,7 @@ import styled from 'styled-components';
 
 const TeamsNavigate = () => {
 	const { pathname } = useLocation();
-	const { teams } = useSelector(state => state.teams);
+	const { teams = [] } = useSelector(state => state.teams);
 
 	const teamId = pathname.split('/')[2];
 

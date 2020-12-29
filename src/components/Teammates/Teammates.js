@@ -7,7 +7,7 @@ import TeammatesCard from './TeammatesCard';
 //Styles
 import styled from 'styled-components';
 
-const Teammates = ({ name, email, avatarRef, isUserTeam, onSubmit, onChange, teammates }) => (
+const Teammates = ({ name, email, avatarRef, isUserTeam, onSubmit, onChange, teammates = [] }) => (
 	<StyledList>
 		{isUserTeam && (
 			<li>

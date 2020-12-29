@@ -10,7 +10,6 @@ import { Loader } from '../Commons';
 import { useSelector, useDispatch } from 'react-redux';
 import { authStateChange } from 'redux/auth/authOperations';
 import { getAllTeams } from 'redux/teams/teamsOperations';
-
 //Routes
 import routes from 'router';
 import PublicRoute from 'router/PublicRoute';

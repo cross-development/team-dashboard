@@ -7,7 +7,7 @@ import { StyledSelect } from './LocationInfo.styles';
 //Data
 import countries from 'data/countries.json';
 
-const LocationInfo = ({ locationInfo, onChangeLocationInfo }) => (
+const LocationInfo = ({ locationInfo = {}, onChangeLocationInfo }) => (
 	<StyledLocationInfo>
 		<StyledLabel>
 			Country

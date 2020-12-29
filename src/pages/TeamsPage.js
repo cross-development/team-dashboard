@@ -21,7 +21,7 @@ const TeamsPage = () => {
 
 	const dispatch = useDispatch();
 	const { uid } = useSelector(state => state.auth);
-	const { teams, error, loading: teamsLoading } = useSelector(state => state.teams);
+	const { teams = [], error, loading: teamsLoading } = useSelector(state => state.teams);
 
 	const { pathname } = useLocation();
 
@@ -45,8 +45,8 @@ const TeamsPage = () => {
 			avatar: avatarURI,
 		};
 
-		await dispatch(createTeam(team, uid));
-		await setState(initialState);
+		dispatch(createTeam(team, uid));
+		setState(initialState);
 	};
 
 	return (
@@ -70,4 +70,3 @@ const TeamsPage = () => {
 };
 
 export default TeamsPage;
-// && filteredTeams.length > 0

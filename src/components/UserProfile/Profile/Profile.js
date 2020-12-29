@@ -10,8 +10,10 @@ import { StyledName, StyledAvatar, StyledTitle, StyledFileInput } from './Profil
 const Profile = ({ avatar, avatarRef, userName }) => {
 	const [isAccepted, setIsAccepted] = useState(false);
 
-	const setInputAccept = e => {
-		if (e.target.files.length > 0) setIsAccepted(true);
+	const setInputAccept = ({ target: { files } }) => {
+		if (files.length > 0) {
+			setIsAccepted(true);
+		}
 	};
 
 	useEffect(() => {

@@ -12,7 +12,7 @@ import { StyledCardItem, StyledLikeBtn, StyledImgWrap, StyledAvatar } from './Te
 //Public assets
 const defaultAvatar = `${process.env.PUBLIC_URL}/avatars/unnamed.png`;
 
-const TeammatesCard = ({ teammateId, teammate }) => {
+const TeammatesCard = ({ teammateId, teammate = {} }) => {
 	const { name, email, avatar, isLiked, userId } = teammate;
 
 	const { uid } = useSelector(state => state.auth);

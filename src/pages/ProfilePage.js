@@ -20,7 +20,7 @@ const ProfilePage = () => {
 	const dispatch = useDispatch();
 
 	const avatarRef = useRef(null);
-	const { profileInfo, photoURL, displayName } = useSelector(state => state.auth);
+	const { profileInfo = {}, photoURL, displayName } = useSelector(state => state.auth);
 
 	const [commonInfo, setCommonInfo] = useState(profileInfo?.userInfo);
 

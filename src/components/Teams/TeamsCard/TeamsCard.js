@@ -12,7 +12,7 @@ import { StyledCardItem, StyledImgWrap, StyledAvatar, StyledLink } from './Teams
 //Public assets
 const defaultAvatar = `${process.env.PUBLIC_URL}/avatars/users-group.png`;
 
-const TeamsCard = ({ userId, team, onRemoveTeamCard }) => {
+const TeamsCard = ({ userId, team = {}, onRemoveTeamCard }) => {
 	const { uid, teamId, avatar, name, email, isLiked } = team;
 
 	const dispatch = useDispatch();

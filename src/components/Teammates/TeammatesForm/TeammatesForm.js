@@ -10,8 +10,10 @@ import { StyledLabel, StyledInput, StyledButton, StyledFileLabel } from './Teamm
 const TeammatesForm = ({ name, email, avatarRef, onSubmit, onChange }) => {
 	const [isAccepted, setIsAccepted] = useState(false);
 
-	const setInputAccept = e => {
-		if (e.target.files.length > 0) setIsAccepted(true);
+	const setInputAccept = ({ target: { files } }) => {
+		if (files.length > 0) {
+			setIsAccepted(true);
+		}
 	};
 
 	useEffect(() => {

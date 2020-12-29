@@ -20,7 +20,7 @@ const TeammatesPage = () => {
 	const dispatch = useDispatch();
 	const { teamId } = useParams();
 	const { uid } = useSelector(state => state.auth);
-	const { teams } = useSelector(state => state.teams);
+	const { teams = [] } = useSelector(state => state.teams);
 	const { error } = useSelector(state => state.teammates);
 
 	const [state, setState] = useState(initialState);
@@ -62,8 +62,8 @@ const TeammatesPage = () => {
 			avatar: avatarURI,
 		};
 
-		await dispatch(addTeammate({ teammate, teamId }));
-		await setState(initialState);
+		dispatch(addTeammate({ teammate, teamId }));
+		setState(initialState);
 	};
 
 	return (

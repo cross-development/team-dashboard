@@ -22,9 +22,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
-// {!uid && loading && <Loader onLoad={true} />}
-
-// {!uid && <Home />}
-
-// {uid && <Main />}

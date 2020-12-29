@@ -10,7 +10,7 @@ import PhoneInfo from './PhoneInfo';
 import { StyledAcceptWrap, StyledButton } from './Settings.styles';
 import { StyledContainer, StyledTitle, StyledSettingsContainer } from './Settings.styles';
 
-const Settings = ({ commonInfo, onChangeCommonInfo, onChangeBirthdayInfo }) => {
+const Settings = ({ commonInfo = {}, onChangeCommonInfo, onChangeBirthdayInfo }) => {
 	const { birthday, email, gender, name, country, region, phoneNumber, postalCode } = commonInfo;
 
 	const generalInfo = { email, gender, name };

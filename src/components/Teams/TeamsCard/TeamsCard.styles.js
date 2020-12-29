@@ -55,7 +55,7 @@ export const StyledImgWrap = styled.div`
 export const StyledAvatar = styled.img`
 	display: block;
 	width: 100%;
-	height: auto;
+	height: 100%;
 	border-radius: 50px;
 	box-shadow: 0px 0px 2px 0px #707070;
 `;
